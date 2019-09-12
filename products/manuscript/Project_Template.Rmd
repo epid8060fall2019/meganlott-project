@@ -22,7 +22,7 @@ _Write a summary of your project._
 
 ## General Background Information
 
-Bacteria are increasingly recognized for their role in modulating harmful algal blooms (HABs) [REF}. In turn, algal blooms have been found to stimulate microbial activity of the aquatic bacterial community, including pathogenic bacteria [REF]. 
+Bacteria are increasingly recognized for their role in modulating harmful algal blooms (HABs) [REF]. In turn, algal blooms have been found to stimulate microbial activity of the aquatic bacterial community, including pathogenic bacteria [REF]. 
 
 Vibrio spp. are a group of human pathogenic bacteria that are ubiquitous in estuary and marine environments. Vibrio illnesses are typically associated with the consumption of contaminated water and seafood, or with the infection of exposed wounds. V. vulnificus infection is the leading cause of seafood-borne deaths in the United States, usually the infection of exposed wounds by contaminated waters. 
 
