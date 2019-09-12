@@ -1,7 +1,7 @@
 ---
-title: "Example Template for Data Analysis Project"
+title: "Bloom or Bust: Influence of Harmful Algal Blooms on Vibrio Ecology in Florida's Indian River Lagoon"
 subtitle: ""
-author: Andreas Handel
+author: Megan Lott
 institute: "University of Georgia"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -17,42 +17,38 @@ csl: ../apa.csl
 # Summary/Abstract
 _Write a summary of your project._
 
-# Illustrating setup
-_This section is only there to show how to insert results from other places in the project and how to cite figures and other references. Delete this whole section at some point._
-
-
-This paper [@Leek2015a] discusses types of analyses. 
-
-
-Figure \@ref(fig:resultfigure) shows a result figure from the analysis.
-
-```{r resultfigure,  fig.cap='Analysis figure.', echo=FALSE}
-knitr::include_graphics("../../results/resultfigure.png")
-```
-
-Table \@ref(tab:resulttable) shows a result table from the analysis.
-
-```{r resulttable,  echo=FALSE}
-resulttable=readRDS("../../results/resulttable.rds")
-knitr::kable(resulttable, caption = 'Result Table.')
-```
-
-
-Note that this cited reference will show up at the end of the document, the reference formatting is determined by the CSL file specified in the YAML header. Many more style files for almost any journal [are available](https://www.zotero.org/styles). You also specify the location of your bibtex reference file in the YAML. You can call your reference file anything you like, I just used the generic word `references.bib` but giving it a more descriptive name is probably better.
-
 
 # Introduction (required for part 1)
 
 ## General Background Information
-_Provide enough background on your topic that others can understand the why and how of your analysis_ 
+
+Bacteria are increasingly recognized for their role in modulating harmful algal blooms (HABs) [REF}. In turn, algal blooms have been found to stimulate microbial activity of the aquatic bacterial community, including pathogenic bacteria [REF]. 
+
+Vibrio spp. are a group of human pathogenic bacteria that are ubiquitous in estuary and marine environments. Vibrio illnesses are typically associated with the consumption of contaminated water and seafood, or with the infection of exposed wounds. V. vulnificus infection is the leading cause of seafood-borne deaths in the United States, usually the infection of exposed wounds by contaminated waters. 
+
+Research has demonstrated that the distribution and dynamics of Vibrio populations are heavily influenced by environmental factors and that Vibrio abundance increases during algal blooms [REF]. Rapid algal growth may provide substrates and surfaces that stimulate Vibrio growth. Phytoplankton blooms may influence Vibrio ecology. In turn, Vibrio blooms may pose health risks to local populations.
+
+Investigating bacterial-algal interactions improves our understanding how HAB events shape microbial health risks. 
+
+Our research is conducted along Florida’s Indian River Lagoon (IRL), which stretches along Florida’s east coast. The IRL is an estuary of national significance and is protected by the USA National Estuaries Program. In recent years, the IRL has suffered from dense and damaging algal blooms, including those caused by the novel brown tide algae Aureoumbra lagunensis and by the toxic blue-green algae Microcystis aeruginosa. Our research aims to investigate the interactions between bacteria and harmful algae during these HAB events. 
+
+We aimed to observe these dynamics during the summer of 2019. During this period, **we did not observe an algal bloom** at our field site. **but** we did collect a wealth of data on Vibrio populations and environemntal variables. I am hoping to use this project as an opportunity to examine our data with these variables. With a reproducible analysis, I am hopeful that we can collect and analyze our data when a bloom event arises.    
 
 ## Description of data and data source
-_Describe what the data is, what it contains, where it is from, etc._
+
+The primary data shared here was collected during our 2019 field season. During this field season, surface water samples were collected from the Northern Indian River Lagoon and the St. Lucie Estuary, along Florida's eastern coast. Weekly samples were collected between June 5, 2019 and July 30, 2019. Environemntal variables were measured at the time of sampling. Samples were processed to enumerate Vibrio bacteria from water samples. 
+
+We will also include here environmental variables measured or predicted by other agencies. This data includes information on aerosol deposition (dust data), precipitation, and surface water flow. 
 
 ## Questions/Hypotheses to be addressed
-_State the research questions you plan to answer with this analysis_
 
+Broadly, we aim to examine the associations between Vibrio spp. and harfmul algal species during the succession of a bloom event. We ask: do harmful algal blooms promote Vibrio growth during a bloom event? We hypothesize that Vibrio populations will increase during brown tide blooms. The ecology of these two organisms are similar (they both thrive in warm, salty waters). In contrast, we predict that Vibrio populations will decrease during the toxic blue-green algae blooms caused by Microcystis aeruginosa. Microcystis thrives in freshwaters and produces a harmful toxin that may damage Vibrio bacteria. 
 
+We're still keeping a watchful eye for an alagl bloom back in Florida, but until then, we hope to ask more exploratory questions to see if there are trends or relationships between Vibrio bacteria and other environmental variables. 
+
+In this analysis, we ask: how do environemntal conditions influence Vibrio populations in Florida's Indian River Lagoon? Can the patterns in our Vibrio data be explained by salinity, pH, water temperature, precipitation, or aerosol deposition? We predict that Vibrio populations increase with warmer temperatures and with salinity. 
+
+During this field season, there was a notable "dust event," where Saharan Dust was transported across the Atlantic to Florida's coast. This dust may provide nutrients for rapid Vibrio growth. Are there associations between the dust patterns and Vibrio populations? 
 
 # Methods and Results
 
