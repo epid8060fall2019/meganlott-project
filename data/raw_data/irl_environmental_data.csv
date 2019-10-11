@@ -1,0 +1,25 @@
+location_num,location_name,week,date ,sample_id,water_temp,ph,salinity 
+1,Scottsmoore Landing,1,6/10/2019,IRL_01_1,26.3,8.18,28
+2,Titusville Pier,1,6/10/2019,IRL_01_2,26.85,8.05,26
+3,Beacon 42 Boat Ramp,1,6/10/2019,IRL_01_3,26.7,8,29
+1,Scottsmoore Landing,2,6/17/2019,IRL_02_1,31.14,8.07,20
+2,Titusville Pier,2,6/17/2019,IRL_02_2,28.12,8.19,24
+3,Beacon 42 Boat Ramp,2,6/17/2019,IRL_02_3,30.22,8.16,28
+1,Scottsmoore Landing,3,6/24/2019,IRL_03_1,29,7.99,26
+2,Titusville Pier,3,6/24/2019,IRL_03_2,28.76,8.07,25
+3,Beacon 42 Boat Ramp,3,6/24/2019,IRL_03_3,29.05,8,30
+1,Scottsmoore Landing,4,7/1/2019,IRL_04_1,32.87,7.99,22
+2,Titusville Pier,4,7/1/2019,IRL_04_2,29.86,8.1,24
+3,Beacon 42 Boat Ramp,4,7/1/2019,IRL_04_3,31.12,8.14,28
+1,Scottsmoore Landing,5,7/8/2019,IRL_05_1,29.04,7.77,26
+2,Titusville Pier,5,7/8/2019,IRL_05_2,28.55,8.06,25
+3,Beacon 42 Boat Ramp,5,7/8/2019,IRL_05_3,30.63,8.03,30
+1,Scottsmoore Landing,6,7/15/2019,IRL_06_1,35.3,8.31,18
+2,Titusville Pier,6,7/15/2019,IRL_06_2,31.01,8.23,24
+3,Beacon 42 Boat Ramp,6,7/15/2019,IRL_06_3,33.67,8.15,27
+1,Scottsmoore Landing,7,7/22/2019,IRL_07_1,32.58,7.99,20
+2,Titusville Pier,7,7/22/2019,IRL_07_2,32.01,7.94,25
+3,Beacon 42 Boat Ramp,7,7/22/2019,IRL_07_3,31.23,7.97,30
+1,Scottsmoore Landing,8,7/29/2019,IRL_08_1,30.35,7.61,21
+2,Titusville Pier,8,7/29/2019,IRL_08_2,29.23,8.04,26
+3,Beacon 42 Boat Ramp,8,7/29/2019,IRL_08_3,28.9,7.88,27
