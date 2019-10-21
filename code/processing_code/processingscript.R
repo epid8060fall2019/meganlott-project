@@ -6,6 +6,7 @@ library(dplyr)
 library(lubridate)
 library(plyr)
 library(scales)
+library(wesanderson)
 
 #Data Set
 
@@ -154,11 +155,6 @@ sle_environmental = left_join(sle_environmental, sle_dust, by = "date")
 
 environmental = bind_rows(irl_environmental, sle_environmental, .id = "region")
 
-#saveRDS(irl_environmental, file = "./data/processed_data/irl_environmental.rds")
-#saveRDS(irl_vibrio, file = "./data/processed_data/irl_vibrio.rds")
-#saveRDS(sle_environmental, file = "./data/processed_data/processeddata.rds")
-#saveRDS(sle_vibrio, file = "./data/processed_data/processeddata.rds")
-
 
 #EXPLORATORY DATA ANALYSIS 
 
@@ -175,103 +171,26 @@ irl_vibrio2 = irl_vibrio %>%
 sle_vibrio2 = sle_vibrio %>% 
   separate(col = sample_id, into = c("sample_id","rep_id"), sep = c(8))
 
+
 irl_vibrio2 = ddply(irl_vibrio2,.(sample_id),summarize, raw_vib = mean(raw_total), rv_se = 2*sqrt(raw_vib)) 
 
 sle_vibrio2 = ddply(sle_vibrio2,.(sample_id),summarize, raw_vib = mean(raw_total), rv_se = 2*sqrt(raw_vib)) 
 
 
-##################
-
-#Let's explore data from the Indian River Lagoon, alone.
-
 irl_environmental = left_join(irl_environmental, irl_vibrio2, by = "sample_id")
 
-
-#Visualization
-
-irl_environmental %>%
-  filter(location_num == 3) %>%
-  ggplot(aes(x = date, y = log(raw_vib))) + 
-  geom_point() +
-  ylim(0,8)
+sle_environmental = left_join(sle_environmental, sle_vibrio2, by = "sample_id")
 
 
-irl_environmental %>%
-  ggplot(aes(x = date, y = raw_vib, group = location_name, color = location_name)) + 
-  geom_line() + 
-  geom_point() + 
-  geom_errorbar(aes(ymin = raw_vib-rv_se, ymax = raw_vib + rv_se), width = 0.2) 
-
-
-irl_environmental %>% 
-  filter(location_name == "Titusville Pier") %>%
-  ggplot(aes(x = date, y = raw_vib)) + 
-  geom_point()
-
-irl_environmental %>% 
-  ggplot(aes(x = AOD_1020nm, y = raw_vib, group = location_name, color = location_name)) + 
-  geom_point() 
-
-
-
-##########################
-
-#Now, let's explore the combined data set.  
 
 vibrio = bind_rows(irl_vibrio2, sle_vibrio2)
 environmental_vibrio = left_join(environmental, vibrio, by = "sample_id")
 environmental_vibrio = mutate(environmental_vibrio, log_raw_vib = log10(raw_vib))
-
-environmental_vibrio %>%
-  ggplot(aes(x = date, y = log_raw_vib, group = location_name, color = location_name)) + 
-  geom_point() + 
-  geom_line()
+environmental_vibrio = mutate(environmental_vibrio, log_rv_se = log10(rv_se))
 
 
-environmental_vibrio %>%
-  filter(region == 2) %>%
-  ggplot(aes(x = date, y = log_raw_vib, group = location_name, color = location_name)) + 
-  geom_point() + 
-  geom_line()
+saveRDS(environmental_vibrio, file = "./data/processed_data/environmental_vibrio.rds")
+saveRDS(sle_environmental, file = "./data/processed_data/sle_environmental.rds")
+saveRDS(irl_environmental, file = "./data/processed_data/irl_environmental.rds")
 
-
-
-environmental_vibrio %>% 
-  ggplot(aes(x = AOD_1020nm, y = raw_vib, group = location_name, color = location_name)) + 
-  geom_point() 
-
-environmental_vibrio %>% 
-  ggplot(aes(x = AOD_1020nm, y = log_raw_vib, group = location_name, color = location_name)) + 
-  geom_point() + 
-  ylim(0,5)
-
-environmental_vibrio %>%
-  filter(previous_24 != "NA") %>%
-  ggplot(aes(x = previous_24, y = log_raw_vib, group = region, color = region)) + 
-  geom_point() + 
-  ylim(0,5)
-
-environmental_vibrio %>%
-  filter(previous_24 != "NA") %>%
-  ggplot(aes(x = previous_24, y = log_raw_vib, group = location_name, color = location_name)) + 
-  geom_point() + 
-  ylim(0,5)
-
-
-environmental_vibrio %>%
-  filter(previous_48 != "NA") %>%
-  ggplot(aes(x = previous_48, y = log_raw_vib, group = location_name, color = location_name)) + 
-  geom_point() + 
-  ylim(0,5)
-
-
-environmental_vibrio %>%
-  ggplot(aes(x = previous_72, y = log_raw_vib, group = location_name, color = location_name)) + 
-  geom_point() + 
-  ylim(0,5)
-
-
-#irl_dust = mutate(irl_dust, date == as.Date(date, "%m/%d/%Y"))
-#class(irl_dust$date)
-#as.Date(strDates, "%m/%d/%Y")
 

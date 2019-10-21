@@ -1,0 +1,74 @@
+---
+title: "Processing Script"
+author: "Megan Lott"
+date: "October 7, 2019"
+output: html_document
+---
+
+```{r load libraries}
+library(tidyverse)
+library(dplyr)
+```
+
+#Data Set
+
+##Vibrio Data - Culturable Vibrio were enumerated from surface waters by spread plate onto TCBS.  
+
+##Environmental Data - Water temperature and pH were determined using a YSI sonde. Salinity was determined using a refractometer. Data was collected on site at the time of sampling.  
+
+##Dust Data - Daily averages for aerosol optical depth (AOD) were obtained from [AERONET Version 3](https://aeronet.gsfc.nasa.gov/new_web/data.html). The AOD values were obtained for stations at NASA Kennedy Space Center and Lake Okeechobee to approximate the aerosol optical depth in the Northern Indian River Lagoon (IRL), and the St. Lucie Estuary (sle), respectively. The following data are cloud cleared and quality controls have been applied but these data may not have final calibration applied. For more information on this data, contact: PI Nima_Pahlevan at nima.pahlevan@nasa.gov
+
+```{r load vibrio data}
+irl_vibrio = read.csv("./data/raw_data/irl_raw_vibrio_counts.csv")
+sle_vibrio = read.csv("./data/raw_data/sle_raw_vibrio_counts.csv")
+```
+
+```{r load environmental data}
+irl_environmental = read.csv("./data/raw_data/irl_environmental_data.csv")
+sle_environmental = read.csv("./data/raw_data/sle_environmental_data.csv")
+```
+
+```{r load dust data}
+irl_dust = read.csv("./data/raw_data/ksc_dust.csv")
+sle_dust = read.csv("./data/raw_data/lake_okeechobee_dust.csv")
+```
+
+When observing the AOD Dust data, there appears to be many observations gor AOD at different wavelengths. We should retain the data at a single wavelength, and save this data to the environmental variables data table. It appears that the KSC and Lake Okeechobee data maintain data at different wavelengths, but do have data at 1020nm
+
+```{r processing}
+
+#keep dust data at 1020nm
+irl_dust = irl_dust %>%
+  select(Date.dd.mm.yyyy., AOD_1020nm)
+
+sle_dust = sle_dust %>%
+  select(Date.dd.mm.yyyy., AOD_1020nm)
+
+#rename date columm in Dust Data 
+names(irl_dust)[1] = "date"
+names(sle_dust)[1] = "date"
+
+#rename date column in Vibrio data
+names(irl_vibrio)[2] = "date"
+names(sle_vibrio)[2] = "date"
+
+
+#date for environmental variables is different than that of the other observations. We want MM/DD/YYYY. 
+#Right now, the dates in the dust table, environmental table, and vibrio table are saved as factors.
+
+class(irl_dust$date)
+class(irl_environmental$date)
+class(irl_vibrio$date)
+
+data.frame(irl_environmental, stringsAsFactors =FALSE)
+irl_environmental$date = as.Date(irl_environmental$date, format= "%m/%d/%y")
+
+
+
+#add dust data into enviornmental varibales
+irl_environmental = left_join(irl_environmental, irl_dust, by = "date")
+
+```
+
+
+saveRDS(cleandata, file = "./data/processed_data/processeddata.rds")
