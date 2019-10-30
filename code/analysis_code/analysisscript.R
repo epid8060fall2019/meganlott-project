@@ -89,7 +89,7 @@ irl_vibrio = environmental_vibrio %>%
   scale_color_manual(values=wes_palette("Darjeeling1"))
 
 
-environmental_vibrio %>%
+sle_vibrio = environmental_vibrio %>%
   filter(region == 2) %>%
   ggplot(aes(x = date, y = log_raw_vib, group = location_name, color = location_name)) + 
   geom_point() + 
