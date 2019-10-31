@@ -188,6 +188,11 @@ environmental_vibrio = left_join(environmental, vibrio, by = "sample_id")
 environmental_vibrio = mutate(environmental_vibrio, log_raw_vib = log10(raw_vib))
 environmental_vibrio = mutate(environmental_vibrio, log_rv_se = log10(rv_se))
 
+  
+id_df <- data.frame(location_name=c("Scottsmoore Landing", "Titusville Pier", "Beacon 42 Boat Ramp", "Snug Harbor", "Stuart Boardwalk", "Leighton Park"), location_id=c("IRL 1", "IRL 2", "IRL 3", "SLE 1", "SLE 2", "SLE 3"))
+environmental_vibrio = left_join(environmental_vibrio, id_df, by = "location_name")
+
+
 
 saveRDS(environmental_vibrio, file = "./data/processed_data/environmental_vibrio.rds")
 saveRDS(sle_environmental, file = "./data/processed_data/sle_environmental.rds")

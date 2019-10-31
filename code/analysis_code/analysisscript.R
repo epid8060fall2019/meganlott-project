@@ -9,6 +9,7 @@ library(lubridate)
 library(plyr)
 library(scales)
 library(wesanderson)
+library(viridis)
 
 #load data. path is relative to project directory.
 environmental_vibrio = readRDS("./data/processed_data/environmental_vibrio.rds")
@@ -77,14 +78,28 @@ environmental_vibrio %>%
 
 ###Vibrio counts###
 
+environmental_vibrio$week = as.factor(environmental_vibrio$week)
+
+environmental_vibrio %>%
+  ggplot(aes(x = week, y = log_raw_vib, group = location_id, color = location_id)) + 
+  geom_point() + 
+  geom_line() + 
+  xlab("Sampling Period") + 
+  geom_errorbar(aes(ymin = log10(raw_vib-rv_se), ymax = log10(raw_vib + rv_se)), width = 0.2) +
+  ylab ("Vibrio Log(CFU/1mL)") + 
+  theme(text = element_text(size = 14)) +
+  scale_color_viridis(name = "Location", discrete = TRUE)
+
 irl_vibrio = environmental_vibrio %>%
   filter(region == 1) %>%
   ggplot(aes(x = date, y = log_raw_vib, group = location_name, color = location_name)) + 
   geom_point() + 
   geom_line() + 
   xlab("Date") + 
+  geom_errorbar(aes(ymin = log10(raw_vib-rv_se), ymax = log10(raw_vib + rv_se)), width = 0.2) +
   ylab ("Vibrio Log(CFU/1mL)") + 
   ggtitle("Enumeration of Vibrio spp. from the Northern Indian River Lagoon") +
+  theme(axis.text = element_text(size = 10)) +
   theme(legend.title = element_blank()) + 
   scale_color_manual(values=wes_palette("Darjeeling1"))
 
@@ -94,6 +109,7 @@ sle_vibrio = environmental_vibrio %>%
   ggplot(aes(x = date, y = log_raw_vib, group = location_name, color = location_name)) + 
   geom_point() + 
   geom_line() + 
+  geom_errorbar(aes(ymin = log10(raw_vib-rv_se), ymax = log10(raw_vib + rv_se)), width = 0.2) +
   xlab("Date") + 
   ylab ("Vibrio Log(CFU/1mL)") + 
   ggtitle("Enumeration of Vibrio spp. from the St. Lucie Estuary") +
