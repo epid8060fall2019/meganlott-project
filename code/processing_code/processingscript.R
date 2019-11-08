@@ -6,7 +6,6 @@ library(dplyr)
 library(lubridate)
 library(plyr)
 library(scales)
-library(wesanderson)
 
 #Data Set
 
@@ -88,8 +87,6 @@ sle_dust$previous_24[34] = sle_dust$AOD_1020nm[33]
 sle_dust$previous_24[40] = sle_dust$AOD_1020nm[39]
 sle_dust$previous_24[47] = sle_dust$AOD_1020nm[46]
 
-sle_dust$previous_24 = as.numeric(sle_dust$previous_24)
-class(sle_dust$previous_24)
 
 sle_dust$previous_48 = "NA"
 sle_dust$previous_48[17] = sle_dust$AOD_1020nm[15]
@@ -98,8 +95,6 @@ sle_dust$previous_48[34] = sle_dust$AOD_1020nm[32]
 sle_dust$previous_48[40] = sle_dust$AOD_1020nm[38]
 sle_dust$previous_48[47] = sle_dust$AOD_1020nm[45]
 
-sle_dust$previous_48 = as.numeric(sle_dust$previous_48)
-class(sle_dust$previous_48)
 
 sle_dust$previous_72 = "NA"
 sle_dust$previous_72[6] = sle_dust$AOD_1020nm[4]
@@ -109,8 +104,6 @@ sle_dust$previous_72[34] = sle_dust$AOD_1020nm[31]
 sle_dust$previous_72[40] = sle_dust$AOD_1020nm[37]
 sle_dust$previous_72[47] = sle_dust$AOD_1020nm[44]
 
-sle_dust$previous_72 = as.numeric(sle_dust$previous_72)
-class(sle_dust$previous_72)
 
 #IRL: 6/10, 6/17, 6/24, 7/1, 7/8, 7/15, 7/22, 7/29
 #24 hours before these dates correspond with the following indeces from dust data:
@@ -122,33 +115,43 @@ irl_dust$previous_24[29] = irl_dust$AOD_1020nm[28]
 irl_dust$previous_24[36] = irl_dust$AOD_1020nm[35]
 irl_dust$previous_24[43] = irl_dust$AOD_1020nm[42]
 
-irl_dust$previous_24 = as.numeric(irl_dust$previous_24)
-class(irl_dust$previous_24)
-
 irl_dust$previous_48 = "NA"
 irl_dust$previous_48[4] = irl_dust$AOD_1020nm[3]
 irl_dust$previous_48[16] = irl_dust$AOD_1020nm[14]
 irl_dust$previous_48[36] = irl_dust$AOD_1020nm[34]
 irl_dust$previous_48[43] = irl_dust$AOD_1020nm[41]
 
-irl_dust$previous_48 = as.numeric(irl_dust$previous_48)
-class(irl_dust$previous_48)
-
 irl_dust$previous_72 = "NA"
 irl_dust$previous_72[16] = irl_dust$AOD_1020nm[13]
 irl_dust$previous_72[36] = irl_dust$AOD_1020nm[33]
 irl_dust$previous_72[43] = irl_dust$AOD_1020nm[40]
-irl_dust$previous_72 = as.numeric(irl_dust$previous_72)
-class(irl_dust$previous_72)
+
 
 #add dust data into enviornmental varibales
 irl_environmental = left_join(irl_environmental, irl_dust, by = "date")
-
-#there is dust data missing from the irl data set for 6/17 and 7/8
-
 sle_environmental = left_join(sle_environmental, sle_dust, by = "date")
 
+
+###MISSING DUST DATA###
+
+#there is dust data missing from the irl data set for 6/17 and 7/8
+irl_environmental$previous_24[4:6] = irl_dust$AOD_1020nm[9] #Sample Date 6/17, Dust Date 6/16
+irl_environmental$previous_48[4:6] = irl_dust$AOD_1020nm[8] #Sample Date 6/17, Dust Date 6/15
+irl_environmental$previous_72[13:15] = irl_dust$AOD_1020nm[25] #Sample Date 7/8, Dust Date 7/5
+
 #there is dust data missing from the sle data set for 6/19
+
+sle_environmental$previous_24[7:9] = sle_dust$AOD_1020nm[10] #Sample Date 6/19, Dust Date 6/18
+
+#Ensure that dust data is numeric
+sle_environmental$previous_24 = as.numeric(sle_environmental$previous_24)
+sle_environmental$previous_48 = as.numeric(sle_environmental$previous_48)
+sle_environmental$previous_72 = as.numeric(sle_environmental$previous_72)
+
+irl_environmental$previous_24 = as.numeric(irl_environmental$previous_24)
+irl_environmental$previous_48 = as.numeric(irl_environmental$previous_48)
+irl_environmental$previous_72 = as.numeric(irl_environmental$previous_72)
+
 
 
 #Let's bind all of the environmental data together 
@@ -171,31 +174,52 @@ irl_vibrio2 = irl_vibrio %>%
 sle_vibrio2 = sle_vibrio %>% 
   separate(col = sample_id, into = c("sample_id","rep_id"), sep = c(8))
 
-
+#Take the average of the replicates and the standard error of the counts.
 irl_vibrio2 = ddply(irl_vibrio2,.(sample_id),summarize, raw_vib = mean(raw_total), rv_se = 2*sqrt(raw_vib)) 
-
 sle_vibrio2 = ddply(sle_vibrio2,.(sample_id),summarize, raw_vib = mean(raw_total), rv_se = 2*sqrt(raw_vib)) 
 
-
+#Now, bind the enviornmental and vibrio data together.
 irl_environmental = left_join(irl_environmental, irl_vibrio2, by = "sample_id")
-
 sle_environmental = left_join(sle_environmental, sle_vibrio2, by = "sample_id")
 
-
-
+#Bind all of the Vibrio data into one df.
 vibrio = bind_rows(irl_vibrio2, sle_vibrio2)
+
+#combine all data into a final data frame.
 environmental_vibrio = left_join(environmental, vibrio, by = "sample_id")
+
+#Take the log of the mean Vibrio counts and Standard Error.
 environmental_vibrio = mutate(environmental_vibrio, log_raw_vib = log10(raw_vib))
 environmental_vibrio = mutate(environmental_vibrio, log_rv_se = log10(rv_se))
 
-  
+#Add IDs for each location: IRL 1:3, SLE 1:3
 id_df <- data.frame(location_name=c("Scottsmoore Landing", "Titusville Pier", "Beacon 42 Boat Ramp", "Snug Harbor", "Stuart Boardwalk", "Leighton Park"), location_id=c("IRL 1", "IRL 2", "IRL 3", "SLE 1", "SLE 2", "SLE 3"))
 environmental_vibrio = left_join(environmental_vibrio, id_df, by = "location_name")
 
+#Dates are saved as factors. Reorder dates so that they appear in order in the figures.
+#SLE: 6/5, 6/12, 6/19, 6/26, 7/3,  7/17, 7/24, 7/31
+#IRL: 6/10, 6/17, 6/24, 7/1, 7/8, 7/15, 7/22, 7/29
 
+environmental_vibrio$date = fct_recode(environmental_vibrio$date, "6/5" = "6/5/2019", "6/10" = "6/10/2019", 
+                                      "6/12"= "6/12/2019", "6/17" = "6/17/2019", "6/19" =  "6/19/2019", 
+                                      "6/24" = "6/24/2019", "6/26" = "6/26/2019", "7/1" = "7/1/2019", 
+                                      "7/3" = "7/3/2019", "7/8" = "7/8/2019", "7/15" = "7/15/2019", 
+                                      "7/17" = "7/17/2019", "7/22" = "7/22/2019", "7/24" = "7/24/2019", 
+                                      "7/29" = "7/29/2019", "7/31" = "7/31/2019" )
+                                                                         
+environmental_vibrio$date = factor(environmental_vibrio$date, levels = c("6/5", "6/10", "6/12", "6/17" , "6/19", 
+                                                                         "6/24" , "6/26", "7/1", 
+                                                                         "7/3" , "7/8", "7/15", 
+                                                                         "7/17", "7/22", "7/24", 
+                                                                         "7/29", "7/31"))
+#Scottsmoor Landing is spelled incorrectly.
+environmental_vibrio$location_name = fct_recode(environmental_vibrio$location_name, "Scottsmoor Landing" = "Scottsmoore Landing")
 
 saveRDS(environmental_vibrio, file = "./data/processed_data/environmental_vibrio.rds")
 saveRDS(sle_environmental, file = "./data/processed_data/sle_environmental.rds")
 saveRDS(irl_environmental, file = "./data/processed_data/irl_environmental.rds")
+saveRDS(irl_dust, file = "./data/processed_data/irl_dust.rds")
+saveRDS(sle_dust, file = "./data/processed_data/sle_dust.rds")
+
 
 
