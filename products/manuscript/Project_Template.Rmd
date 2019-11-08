@@ -50,38 +50,35 @@ In this analysis, we ask: how do environemntal conditions influence Vibrio popul
 
 During this field season, there was a notable "dust event," where Saharan Dust was transported across the Atlantic to Florida's coast. This dust may provide nutrients for rapid Vibrio growth. Are there associations between the dust patterns and Vibrio populations? 
 
-# Methods and Results
+# Methods
 
 _In most research papers, results and methods are separate. You can combine them here if you find it easier. You are also welcome to structure things such that those are separate sections._
 
 
-## Data aquisition
+## Data Aquisition
 Vibrio Data - Culturable Vibrio were enumerated from surface waters by spread plate onto TCBS.  
 
 Environmental Data - Water temperature and pH were determined using a YSI sonde.Salinity was determined using a refractometer. Data was collected on site at the time of sampling.  
 
 Dust Data - Daily averages for aerosol optical depth (AOD) were obtained from [AERONET Version 3](https://aeronet.gsfc.nasa.gov/new_web/data.html). The AOD values were obtained for stations at NASA Kennedy Space Center and Lake Okeechobee to approximate the aerosol optical depth in the Northern Indian River Lagoon (IRL), and the St. Lucie Estuary (SLE), respectively. The following data are cloud cleared and quality controls have been applied but these data may not have final calibration applied. For more information on this data, contact: PI Nima_Pahlevan at nima.pahlevan@nasa.gov
 
-## Data import and cleaning
+## Data Import and Cleaning
 _Write code that reads in the file and cleans it so it's ready for analysis. Since this will be fairly long code for most datasets, it might be a good idea to have it in one or several R scripts. If that is the case, explain here briefly what each file does. The files themselves should be commented well so everyone can follow along._
 
-```{r resultfigure,  fig.cap='Analysis figure.', echo=FALSE}
+#Results
 
-knitr::include_graphics("../../results/irl_vibrio.png")
-knitr::include_graphics("../../results/sle_vibrio.png")
-knitr::include_graphics("../../results/vibrio_aod.png")
-knitr::include_graphics("../../results/log_vibrio_aod.png")
-knitr::include_graphics("../../results/vibrio_aod24_regional.png")
-knitr::include_graphics("../../results/vibrio_aod24.png")
-knitr::include_graphics("../../results/vibrio_aod48.png")
-knitr::include_graphics("../../results/vibrio_aod72.png")
+## Univariate analysis
+_Use a combination of text/tables/figures to explore and describe your data. You should produce plots or tables or other summary quantities for most of your variables. You definitely need to do it for the important variables, i.e. if you have main exposure or outcome variables, those need to be explored. Depending on the total number of variables in your dataset, explore all or some of the others._
+
+```{r resultfigure,  fig.cap='Enumeration of Vibrio spp. from the Indian River Lagoon and St. Lucie Estuary. Samples were collected between June 5, 2019 and July 30, 2019.', echo=FALSE}
+
+knitr::include_graphics("../../results/all_vibrio.png")
 
 ```
 
 
 
-## Univariate analysis
-_Use a combination of text/tables/figures to explore and describe your data. You should produce plots or tables or other summary quantities for most of your variables. You definitely need to do it for the important variables, i.e. if you have main exposure or outcome variables, those need to be explored. Depending on the total number of variables in your dataset, explore all or some of the others._
+
 
 ## Bivariate analysis
 _Create plots or tables and compute simple statistics (e.g. t-tests, simple regression model with 1 predictor, etc.) to look for associations between your outcome(s) and each individual predictor variable_
