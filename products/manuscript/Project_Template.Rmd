@@ -15,10 +15,10 @@ csl: ../apa.csl
 
 
 # Summary/Abstract
-_Write a summary of your project._
+Harmful Algal Blooms (HABs) are an emerging concern for ecosystem and human health. Little is known about the influence of these HAB events on Vibrio dynamics in Florida’s estuaries. The “Omics” revolution has improved the resolution and scale by which researchers investigate the complex interactions between Vibrio bacteria and algae in natural waters. Through a genomics approach, this study examines the dynamics between Vibrio populations and harmful algal blooms in Florida’s Indian River Lagoon system. Surface water samples were collected from the Northern Indian River and St. Lucie Estuary weekly between June and July 2019. Samples were size fractionated to separate particle-attached and planktonic Vibrio bacteria. From each fraction, Vibrio abundance was estimated by culture-based methods as well as quantitate PCR (qPCR), targeting the RNA polymerase subunit A (rpoA). The abundance of phytoplankton was determined by flow cytometry. To characterize the species-specific associations between Vibrio and phytoplankton, the Vibrio hsp60 gene was amplified and sequenced from each fraction. This research demonstrates the correlations between Vibrio and phytoplankton abundance, while providing improved resolution of Vibrio assemblages associated with microalgae. By investigating bacterial-algal interactions, we may improve our understanding of how HAB events shape Vibrio ecology and microbial health risks.
 
 
-# Introduction (required for part 1)
+# Introduction 
 
 ## General Background Information
 
@@ -52,40 +52,84 @@ During this field season, there was a notable "dust event," where Saharan Dust w
 
 # Methods
 
-_In most research papers, results and methods are separate. You can combine them here if you find it easier. You are also welcome to structure things such that those are separate sections._
+Water samples were collected in triplicate from three locations in both the Northern Indian River Lagoon and the St. Lucie Estuary. Samples were collected weekly between June 2019 and July 2019 to monitor phytoplankton and Vibrio abundance (n = 144). 
+
+Water samples were pre-filtered using a sterilized 200-µm filter to remove debris, detritus, and zooplankton. Physical parameters of the sampling sites were measured in-field using a YSI sonde. Salinity was determined using a refractometer. Data was collected on site at the time of sampling. Water samples will be analyzed for Chl a and nutrient composition. Water quality will be cross-referenced with the Continuous Sensor-based Water Quality Data from St. John’s Water Management District. 
+
+Samples were plated onto TCBS to culture and enumerate Vibrio bacteria. Cell density of phytoplankton will be determined from fixed samples using direct counts and flow cytometry.
+
+Water samples were size fractionated in series onto polycarbonate filters (2.0 µm) and Sterivex filters (0.22 µm) to seperate the particle-attached and planktonic bacterial communities. DNA will be extracted from stored filters using the Qiagen PowerSoil Pro Kit and phenol:chloroform:isoamyl extractions. Bacterial and phytoplankton DNA will be sequenced to characterize the aquatic microbial community.
+
+Bacterial and cyanobacterial 16S rRNA will be amplified using universal 16S primers 515F/806R [REF]. Novel NGS sequencing of the Vibrio heat shock  protein 60 (hsp60) will be sequenced as described in Jesser and Noble 2018 to provide additional taxonomic resolution of the Vibrio community. 18S rRNA will be amplified using the universal 18S primers EukA/329R10 as described in Torre et al. 2019 to analyze the phytoplankton community. 
 
 
 ## Data Aquisition
-Vibrio Data - Culturable Vibrio were enumerated from surface waters by spread plate onto TCBS.  
 
-Environmental Data - Water temperature and pH were determined using a YSI sonde.Salinity was determined using a refractometer. Data was collected on site at the time of sampling.  
-
-Dust Data - Daily averages for aerosol optical depth (AOD) were obtained from [AERONET Version 3](https://aeronet.gsfc.nasa.gov/new_web/data.html). The AOD values were obtained for stations at NASA Kennedy Space Center and Lake Okeechobee to approximate the aerosol optical depth in the Northern Indian River Lagoon (IRL), and the St. Lucie Estuary (SLE), respectively. The following data are cloud cleared and quality controls have been applied but these data may not have final calibration applied. For more information on this data, contact: PI Nima_Pahlevan at nima.pahlevan@nasa.gov
+Daily averages for aerosol optical depth (AOD) were obtained from [AERONET Version 3](https://aeronet.gsfc.nasa.gov/new_web/data.html). The AOD values were obtained for stations at NASA Kennedy Space Center and Lake Okeechobee to approximate the aerosol optical depth in the Northern Indian River Lagoon (IRL), and the St. Lucie Estuary (SLE), respectively. The following data are cloud cleared and quality controls have been applied but these data may not have final calibration applied. For more information on this data, contact: PI Nima_Pahlevan at nima.pahlevan@nasa.gov
 
 ## Data Import and Cleaning
-_Write code that reads in the file and cleans it so it's ready for analysis. Since this will be fairly long code for most datasets, it might be a good idea to have it in one or several R scripts. If that is the case, explain here briefly what each file does. The files themselves should be commented well so everyone can follow along._
+The processing script provides code that imports and cleans the data included in this analysis. Water quality paramters and Vibrio counts were recorded as data was collected. Daily averages for aerosol optical depth (AOD) were obtained from [AERONET Version 3](https://aeronet.gsfc.nasa.gov/new_web/data.html) on 9/12/2019. 
 
 #Results
 
 ## Univariate analysis
-_Use a combination of text/tables/figures to explore and describe your data. You should produce plots or tables or other summary quantities for most of your variables. You definitely need to do it for the important variables, i.e. if you have main exposure or outcome variables, those need to be explored. Depending on the total number of variables in your dataset, explore all or some of the others._
 
-```{r resultfigure,  fig.cap='Enumeration of Vibrio spp. from the Indian River Lagoon and St. Lucie Estuary. Samples were collected between June 5, 2019 and July 30, 2019.', echo=FALSE}
-
+```{r fig.cap='Enumeration of Vibrio spp. from the Indian River Lagoon and St. Lucie Estuary. Samples were collected between June 5, 2019 and July 30, 2019.', echo=FALSE, warning=FALSE}
 knitr::include_graphics("../../results/all_vibrio.png")
+```
 
+
+```{r fig.cap='Enumeration of Vibrio spp. from the Indian River Lagoon between June 5, 2019 and July 30, 2019.', echo=FALSE, warning=FALSE}
+knitr::include_graphics("../../results/irl_vibrio.png")
 ```
 
 
 
+```{r fig.cap='Enumeration of Vibrio spp. from the St. Lucie Estuary between June 5, 2019 and July 30, 2019.', echo=FALSE, warning=FALSE}
+knitr::include_graphics("../../results/sle_vibrio.png")
+```
+
+
+```{r fig.cap = "Aerosol optical density (AOD at 1020nm) over time in the Indian River Lagoon and St. Lucie Estuary, as determined by Aeronet Stations at KSC and Lake Okechobee, respectively.", echo=FALSE, warning=FALSE}
+knitr::include_graphics("../../results/dust_date.png")
+```
+
+
+```{r fig.cap = "Water quality parameters over time in the Indian River Lagoon as determined in field using refractometer and YSI sonde.", echo=FALSE, warning=FALSE}
+knitr::include_graphics("../../results/irl_env_date.png")
+```
+
+
+```{r fig.cap= "Water quality parameters over time in the St. Lucie Estuary as determined in field using refractometer and YSI sonde.", echo=FALSE, warning=FALSE}
+knitr::include_graphics("../../results/sle_env_date.png")
+```
+
 
 
 ## Bivariate analysis
-_Create plots or tables and compute simple statistics (e.g. t-tests, simple regression model with 1 predictor, etc.) to look for associations between your outcome(s) and each individual predictor variable_
+
+```{r fig.cap = "Enumeration of Vibrio spp. from the Indian River Lagoon and St. Lucy Estuary in relation to aerosol optical density (1020nm).", echo = FALSE, warning=FALSE}
+knitr::include_graphics("../../results/aod.png")
+```
+
+
+```{r fig.cap = "Enumeration of Vibrio spp. from the Indian River Lagoon and St. Lucy Estuary in relation to water quality parameters.  Water quality parameters were determined in field using refractometer and YSI sonde.", echo = FALSE, warning=FALSE}
+knitr::include_graphics("../../results/env_var.png")
+```
+
+
+```{r fig.cap = "Correlation between environmental variables and Vibrio counts.", echo = FALSE, warning=FALSE}
+knitr::include_graphics("../../results/corr_plot.png")
+```
 
 
 ## Full analysis
-_Use one or several suitable statistical/machine learning methods to analyze your data and to produce meaningful figures, tables, etc. This might again be code that is best placed in one or several separate R scripts that need to be well documented. You can then load the results produced by this code_
+
+```{r simple linear model}
+resulttable = readRDS("../../results/resulttable.rds")
+knitr::kable(resulttable, caption = "Results of linear model fit to explain Vibrio counts.")
+```
+
 
 # Discussion
 

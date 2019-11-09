@@ -105,7 +105,8 @@ ggsave(filename="./results/dust_date.png",plot=dust_date, width = 8, height = 7)
 
 #Let's look at ph, salinity, and temperature over time
 
-ph_date = environmental_vibrio %>% 
+irl_ph_date = environmental_vibrio %>% 
+  filter(region == 1) %>%
   ggplot(aes(x = date, y = ph, group = location_id, color = location_id)) + 
   geom_point() + 
   geom_line() +
@@ -114,7 +115,8 @@ ph_date = environmental_vibrio %>%
   ggtitle("pH") + 
   theme(axis.text.x = element_text(angle = 45))
 
-salinity_date = environmental_vibrio %>% 
+irl_salinity_date = environmental_vibrio %>% 
+  filter(region == 1) %>%
   ggplot(aes(x = date, y = salinity, group = location_id, color = location_id)) + 
   geom_point() + 
   geom_line() +
@@ -123,7 +125,8 @@ salinity_date = environmental_vibrio %>%
   ggtitle("Salinity") + 
   theme(axis.text.x = element_text(angle = 45))
 
-temp_date = environmental_vibrio %>% 
+irl_temp_date = environmental_vibrio %>% 
+  filter(region == 1) %>%
   ggplot(aes(x = date, y = water_temp, group = location_id, color = location_id)) + 
   geom_point() + 
   geom_line() +
@@ -132,8 +135,44 @@ temp_date = environmental_vibrio %>%
   ggtitle("Temperature") + 
   theme(axis.text.x = element_text(angle = 45))
 
-env_date = grid.arrange(ph_date, salinity_date, temp_date)
-ggsave(filename="./results/ev_date.png",plot=env_date) 
+sle_ph_date = environmental_vibrio %>% 
+  filter(region == 2) %>%
+  ggplot(aes(x = date, y = ph, group = location_id, color = location_id)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Date") + 
+  ylab ("pH") + 
+  ggtitle("pH") + 
+  theme(axis.text.x = element_text(angle = 45))
+
+sle_salinity_date = environmental_vibrio %>% 
+  filter(region == 2) %>%
+  ggplot(aes(x = date, y = salinity, group = location_id, color = location_id)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Date") + 
+  ylab ("Salinity (ppt)") + 
+  ggtitle("Salinity") + 
+  theme(axis.text.x = element_text(angle = 45))
+
+sle_temp_date = environmental_vibrio %>% 
+  filter(region == 2) %>%
+  ggplot(aes(x = date, y = water_temp, group = location_id, color = location_id)) + 
+  geom_point() + 
+  geom_line() +
+  xlab("Date") + 
+  ylab ("Temperature (C)") + 
+  ggtitle("Temperature") + 
+  theme(axis.text.x = element_text(angle = 45))
+
+
+irl_env_date = grid.arrange(irl_ph_date, irl_salinity_date, irl_temp_date)
+ggsave(filename="./results/irl_env_date.png",plot=irl_env_date, width = 10, height = 10) 
+
+
+sle_env_date = grid.arrange(sle_ph_date, sle_salinity_date, sle_temp_date)
+ggsave(filename="./results/sle_env_date.png", plot=sle_env_date, width = 10, height = 10) 
+
 
 ###Vibrio vs. Aerosol###
 
@@ -142,7 +181,7 @@ vibrio_aod = environmental_vibrio %>%
   geom_point() + 
   xlab("Aeorosol Optical Density at 1020nm") + 
   ylab ("CFU/1mL") + 
-  ggtitle("Vibrio spp. vs. Aerosol Optical Density on Day of Sampling") +
+  ggtitle("AOD on Day of Sampling") +
   theme(legend.title = element_blank()) 
 
 log_vibrio_aod = environmental_vibrio %>% 
@@ -151,7 +190,7 @@ log_vibrio_aod = environmental_vibrio %>%
   ylim(0,5) + 
   xlab("Aeorosol Optical Density at 1020nm") + 
   ylab ("Log(CFU/1mL)") + 
-  ggtitle("Vibrio spp. vs. Aerosol Optical Density on Day of Sampling") +
+  ggtitle("AOD Day of Sampling") +
   theme(legend.title = element_blank()) 
 
 vibrio_aod24_regional = environmental_vibrio %>%
@@ -161,7 +200,7 @@ vibrio_aod24_regional = environmental_vibrio %>%
   ylim(0,5) + 
   xlab("Aeorosol Optical Density at 1020nm") + 
   ylab ("Log(CFU/1mL)") + 
-  ggtitle("Vibrio spp. vs. Aerosol Optical Density 24h Before Sampling") 
+  ggtitle("AOD Density 24h Before Sampling") 
 
 vibrio_aod24 = environmental_vibrio %>%
   filter(previous_24 != "NA") %>%
@@ -171,7 +210,7 @@ vibrio_aod24 = environmental_vibrio %>%
   ylim(0,5) + 
   xlab("Aeorosol Optical Density at 1020nm") + 
   ylab ("Log(CFU/1mL)") + 
-  ggtitle("Vibrio spp. vs. Aerosol Optical Density 24h Before Sampling") 
+  ggtitle("AOD 24h Before Sampling") 
 
 
 vibrio_aod48 = environmental_vibrio %>%
@@ -181,7 +220,7 @@ vibrio_aod48 = environmental_vibrio %>%
   ylim(0,5) + 
   xlab("Aeorosol Optical Density at 1020nm") + 
   ylab ("Log(CFU/1mL)") + 
-  ggtitle("Vibrio spp. vs. Aerosol Optical Density 48h Before Sampling") 
+  ggtitle("AOD 48h Before Sampling") 
 
 
 vibrio_aod72 = environmental_vibrio %>%
@@ -190,7 +229,7 @@ vibrio_aod72 = environmental_vibrio %>%
   ylim(0,5) + 
   xlab("Aeorosol Optical Density at 1020nm") + 
   ylab ("Log(CFU/1mL)") + 
-  ggtitle("Vibrio spp. vs. Aerosol Optical Density 72h Before Sampling")
+  ggtitle("AOD 72h Before Sampling")
 
 ggsave(filename="./results/vibrio_aod.png",plot=vibrio_aod, width = 8, height = 7) 
 ggsave(filename="./results/log_vibrio_aod.png",plot=log_vibrio_aod, width = 8, height = 7) 
@@ -199,8 +238,8 @@ ggsave(filename="./results/vibrio_aod24.png",plot=vibrio_aod24, width = 8, heigh
 ggsave(filename="./results/vibrio_aod48.png",plot=vibrio_aod48, width = 8, height = 7) 
 ggsave(filename="./results/vibrio_aod72.png",plot=vibrio_aod72, width = 8, height = 7) 
 
-aod = grid.arrange(vibrio_aod, vibrio_aod24, vibrio_aod48, vibrio_aod72, nrow = 3)
-ggsave(filename="./results/aod.png",plot=aod, width = 8, height = 7) 
+aod = grid.arrange(vibrio_aod, vibrio_aod24, vibrio_aod48, vibrio_aod72)
+ggsave(filename="./results/aod.png",plot=aod, width = 8, height = 8) 
 
 
 ###Vibrio vs. Water Quality###
@@ -234,16 +273,16 @@ env_var = grid.arrange(vibrio_ph, vibrio_salinity, vibrio_temp)
 ggsave(filename="./results/vibrio_ph.png",plot=vibrio_ph, width = 8, height = 7) 
 ggsave(filename="./results/vibrio_salinity.png",plot=vibrio_salinity, width = 8, height = 7) 
 ggsave(filename="./results/vibrio_temp.png",plot=vibrio_temp, width = 8, height = 7) 
-ggsave(filename="./results/env_var.png",plot=env_var, width = 8, height = 7) 
+ggsave(filename="./results/env_var.png",plot=env_var, width = 10, height = 10) 
 
 
 ###CORRELATIONS###
 
 d_cor = environmental_vibrio %>% select(raw_vib, log_raw_vib, previous_24, previous_48, previous_72, 
                                         salinity, ph, water_temp) %>% drop_na() %>% cor()
-
-corr_plot = corrplot(d_cor, method="color")
-
+png(height=1800, width=1800, file="./results/corr_plot.png")
+corr_plot = corrplot(d_cor, method="color", tl.cex = 5)
+dev.off()
 
 ###MODELING###
 
@@ -271,7 +310,7 @@ lm_variables = bind_rows(lm_prev24, lm_ph, lm_salinity, lm_water_temp)
 lm_variables = lm_variables %>% filter(term != "(Intercept)")
 
 # save table  
-saveRDS(lmtable, file = "./results/resulttable.rds")
+saveRDS(lm_variables, file = "./results/resulttable.rds")
 
 
 ##Continuous Outcome Analysis##
