@@ -37,6 +37,7 @@ visdat::vis_dat(environmental_vibrio)
 environmental_vibrio$week = as.factor(environmental_vibrio$week)
 
 all_vibrio = environmental_vibrio %>%
+  filter(log_raw_vib != "NA") %>%
   ggplot(aes(x = week, y = log_raw_vib, group = location_id, color = location_id)) + 
   geom_point() + 
   geom_line() + 
@@ -61,6 +62,7 @@ irl_vibrio = environmental_vibrio %>%
 
 
 sle_vibrio = environmental_vibrio %>%
+  filter(log_raw_vib != "NA") %>%
   filter(region == 2) %>%
   ggplot(aes(x = date, y = log_raw_vib, group = location_name, color = location_name)) + 
   geom_point() + 
