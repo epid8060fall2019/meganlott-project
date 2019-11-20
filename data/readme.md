@@ -22,3 +22,6 @@ Version 3: AOD Level 1.5
 The following data are cloud cleared and quality controls have been applied but these data may not have final calibration applied.  These data may change.
 Contact: PI=Nima_Pahlevan; PI Email=nima.pahlevan@nasa.gov
 Daily Averages,UNITS can be found at... https://aeronet.gsfc.nasa.gov/new_web/units.html
+
+
+Precipitation and Air Temperature Data obtained from [U.S. Climate Data](https://www.usclimatedata.com/). Precipation and Air Temperature Data were obtained for Titusville, FL and Stuart, FL and were accessed on Nov. 13, 2019.

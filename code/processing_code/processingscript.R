@@ -48,11 +48,8 @@ names(sle_vibrio)[2] = "date"
 
 
 #keep dust data at 1020nm
-irl_dust = irl_dust %>%
-  select(date, AOD_1020nm)
-
-sle_dust = sle_dust %>%
-  select(date, AOD_1020nm)
+irl_dust = irl_dust %>% select(date, AOD_1020nm)
+sle_dust = sle_dust %>% select(date, AOD_1020nm) 
 
 
 #date for environmental variables is different than that of the other observations. We want MM/DD/YYYY. 
@@ -62,6 +59,17 @@ class(irl_dust$date)
 class(irl_environmental$date)
 class(irl_vibrio$date)
 
+irl_dust$date <- as.Date(irl_dust$date, format = "%m/%d/2019")
+irl_environmental$date <- as.Date(irl_environmental$date, format = "%m/%d/2019")
+irl_vibrio$date <- as.Date(irl_vibrio$date, format = "%m/%d/2019")
+
+class(irl_dust$date)
+class(irl_environmental$date)
+class(irl_vibrio$date)
+
+sle_dust$date <- as.Date(sle_dust$date, format = "%m/%d/2019")
+sle_environmental$date <- as.Date(sle_environmental$date, format = "%m/%d/2019")
+sle_vibrio$date <- as.Date(sle_vibrio$date, format = "%m/%d/2019")
 
 
 #DUST DATA
@@ -192,6 +200,24 @@ environmental_vibrio = left_join(environmental, vibrio, by = "sample_id")
 environmental_vibrio = mutate(environmental_vibrio, log_raw_vib = log10(raw_vib))
 environmental_vibrio = mutate(environmental_vibrio, log_rv_se = log10(rv_se))
 
+#calculate the holding time for samples 
+environmental_vibrio = mutate(environmental_vibrio, holding_time = (filter_time - sample_time)/60)
+
+#calculate the median air temp in degrees C 
+environmental_vibrio = mutate(environmental_vibrio, air_temp_c = (((air_high + air_low)/2)-32)*5/9)
+
+#Create a dust_vibrio data frame
+irl_dust_vibrio = full_join(irl_dust, irl_environmental, by = "date")
+irl_dust_vibrio = irl_dust_vibrio %>% select(date, AOD_1020nm.x, raw_vib, rv_se, location_name)
+irl_dust_vibrio = mutate(irl_dust_vibrio, log_raw_vib = log10(raw_vib))
+irl_dust_vibrio = mutate(irl_dust_vibrio, log_rv_se = log10(rv_se))
+
+sle_dust_vibrio = full_join(sle_dust, sle_environmental, by = "date")
+sle_dust_vibrio = sle_dust_vibrio %>% select(date, AOD_1020nm.x, raw_vib, rv_se, location_name)
+sle_dust_vibrio = mutate(sle_dust_vibrio, log_raw_vib = log10(raw_vib))
+sle_dust_vibrio = mutate(sle_dust_vibrio, log_rv_se = log10(rv_se))
+
+
 #Add IDs for each location: IRL 1:3, SLE 1:3
 id_df <- data.frame(location_name=c("Scottsmoore Landing", "Titusville Pier", "Beacon 42 Boat Ramp", "Snug Harbor", "Stuart Boardwalk", "Leighton Park"), location_id=c("IRL 1", "IRL 2", "IRL 3", "SLE 1", "SLE 2", "SLE 3"))
 environmental_vibrio = left_join(environmental_vibrio, id_df, by = "location_name")
@@ -200,18 +226,18 @@ environmental_vibrio = left_join(environmental_vibrio, id_df, by = "location_nam
 #SLE: 6/5, 6/12, 6/19, 6/26, 7/3,  7/17, 7/24, 7/31
 #IRL: 6/10, 6/17, 6/24, 7/1, 7/8, 7/15, 7/22, 7/29
 
-environmental_vibrio$date = fct_recode(environmental_vibrio$date, "6/5" = "6/5/2019", "6/10" = "6/10/2019", 
-                                      "6/12"= "6/12/2019", "6/17" = "6/17/2019", "6/19" =  "6/19/2019", 
-                                      "6/24" = "6/24/2019", "6/26" = "6/26/2019", "7/1" = "7/1/2019", 
-                                      "7/3" = "7/3/2019", "7/8" = "7/8/2019", "7/15" = "7/15/2019", 
-                                      "7/17" = "7/17/2019", "7/22" = "7/22/2019", "7/24" = "7/24/2019", 
-                                      "7/29" = "7/29/2019", "7/31" = "7/31/2019" )
+#environmental_vibrio$date = fct_recode(environmental_vibrio$date, "6/5" = "6/5/2019", "6/10" = "6/10/2019", 
+                                      #"6/12"= "6/12/2019", "6/17" = "6/17/2019", "6/19" =  "6/19/2019", 
+                                      #"6/24" = "6/24/2019", "6/26" = "6/26/2019", "7/1" = "7/1/2019", 
+                                      #"7/3" = "7/3/2019", "7/8" = "7/8/2019", "7/15" = "7/15/2019", 
+                                      #"7/17" = "7/17/2019", "7/22" = "7/22/2019", "7/24" = "7/24/2019", 
+                                      #"7/29" = "7/29/2019", "7/31" = "7/31/2019" )
                                                                          
-environmental_vibrio$date = factor(environmental_vibrio$date, levels = c("6/5", "6/10", "6/12", "6/17" , "6/19", 
-                                                                         "6/24" , "6/26", "7/1", 
-                                                                         "7/3" , "7/8", "7/15", 
-                                                                         "7/17", "7/22", "7/24", 
-                                                                         "7/29", "7/31"))
+#environmental_vibrio$date = factor(environmental_vibrio$date, levels = c("6/5", "6/10", "6/12", "6/17" , "6/19", 
+                                                                         #"6/24" , "6/26", "7/1", 
+                                                                         #"7/3" , "7/8", "7/15", 
+                                                                         #"7/17", "7/22", "7/24", 
+                                                                         #"7/29", "7/31"))
 #Scottsmoor Landing is spelled incorrectly.
 environmental_vibrio$location_name = fct_recode(environmental_vibrio$location_name, "Scottsmoor Landing" = "Scottsmoore Landing")
 
