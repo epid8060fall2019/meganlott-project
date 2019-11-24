@@ -179,7 +179,7 @@ environmental = bind_rows(irl_environmental, sle_environmental, .id = "region")
 irl_vibrio2 = irl_vibrio %>% 
   separate(col = sample_id, into = c("sample_id","rep_id"), sep = c(8))
 
-sle_vibrio2 = sle_vibrio %>% 
+sle_vibrio2 = sle_vibrio %>% filter(raw_total != "NA") %>%
   separate(col = sample_id, into = c("sample_id","rep_id"), sep = c(8))
 
 #Take the average of the replicates and the standard error of the counts.
@@ -201,7 +201,8 @@ environmental_vibrio = mutate(environmental_vibrio, log_raw_vib = log10(raw_vib)
 environmental_vibrio = mutate(environmental_vibrio, log_rv_se = log10(rv_se))
 
 #calculate the holding time for samples 
-environmental_vibrio = mutate(environmental_vibrio, holding_time = (filter_time - sample_time)/60)
+environmental_vibrio = mutate(environmental_vibrio, holding_time = (filter_time - sample_time)/100)
+environmental_vibrio$holding_time =  round(environmental_vibrio$holding_time, digits = 0)
 
 #calculate the median air temp in degrees C 
 environmental_vibrio = mutate(environmental_vibrio, air_temp_c = (((air_high + air_low)/2)-32)*5/9)
@@ -246,6 +247,5 @@ saveRDS(sle_environmental, file = "./data/processed_data/sle_environmental.rds")
 saveRDS(irl_environmental, file = "./data/processed_data/irl_environmental.rds")
 saveRDS(irl_dust, file = "./data/processed_data/irl_dust.rds")
 saveRDS(sle_dust, file = "./data/processed_data/sle_dust.rds")
-
-
-
+saveRDS(irl_dust_vibrio, file = "./data/processed_data/irl_dust_vibrio.rds")
+saveRDS(sle_dust_vibrio, file = "./data/processed_data/sle_dust_vibrio.rds")
