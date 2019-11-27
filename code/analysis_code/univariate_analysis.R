@@ -12,10 +12,6 @@ library(scales)
 library(wesanderson)
 library(viridis)
 library(gridExtra)
-library(broom)
-library(caret)
-library(Metrics)
-library(ggpubr)
 
 #load data. path is relative to project directory.
 environmental_vibrio = readRDS("./data/processed_data/environmental_vibrio.rds")
@@ -94,19 +90,19 @@ ggsave(filename="./results/sle/sle_vibrio.png",plot=sle_vibrio, width = 8, heigh
 
 
 irl_dust_date = irl_dust %>% filter(AOD_1020nm > 0) %>%
-  ggplot(aes(x = date, y = AOD_1020nm)) + 
+  ggplot(aes(x = date, y = log(AOD_1020nm))) + 
   geom_line() + 
   xlab("Date") + 
-  ylab ("AOD (1020nm)") + 
+  ylab ("Log(AOD at 1020nm)") + 
   ggtitle("Aerosol Optical Density in the Indian River Lagoon") + 
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 
 sle_dust_date = sle_dust %>% filter(AOD_1020nm > 0) %>%
-  ggplot(aes(x = date, y = AOD_1020nm)) + 
+  ggplot(aes(x = date, y = log(AOD_1020nm))) + 
   geom_line() + 
   xlab("Date") + 
-  ylab ("AOD (1020nm)") + 
+  ylab ("Log(AOD at 1020nm)") + 
   ggtitle("Aerosol Optical Density in the St. Lucie Estuary") + 
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
@@ -134,9 +130,9 @@ irl_vibrio2 = environmental_vibrio %>%
         axis.ticks.x = element_blank())
 
  irl_dust_date2 = irl_dust %>% filter(AOD_1020nm > 0) %>%
-  ggplot(aes(x = date, y = AOD_1020nm)) + 
+  ggplot(aes(x = date, y = log(AOD_1020nm))) + 
   geom_line() + 
-  ylab ("AOD (1020nm)") + 
+  ylab ("Log(AOD at 1020nm)") + 
   xlab("") +
   scale_x_date(limits = as.Date(c('2019-06-05','2019-07-31'))) + 
   theme(axis.text.x = element_blank(),
@@ -231,9 +227,9 @@ sle_vibrio2 = environmental_vibrio %>%
 
 
 sle_dust_date2 = sle_dust %>% filter(AOD_1020nm > 0) %>%
-  ggplot(aes(x = date, y = AOD_1020nm)) + 
+  ggplot(aes(x = date, y = log(AOD_1020nm))) + 
   geom_line() + 
-  ylab ("AOD (1020nm)") + 
+  ylab ("Log(AOD at 1020nm)") + 
   xlab("") +
   scale_x_date(limits = as.Date(c('2019-06-05','2019-07-31'))) + 
   theme(axis.text.x = element_blank(),
@@ -300,8 +296,8 @@ ggsave(filename="./results/sle/sle_env_date.png", plot=sle_env_date, height = 12
 p = irl_dust_vibrio %>% filter(AOD_1020nm.x > 0) %>% ggplot(aes(x = date))
 p = p + geom_point(aes(y = log_raw_vib, color = location_name))
 p = p + geom_line(aes(y = log_raw_vib, color = location_name)) 
-p = p + geom_line(aes(y = AOD_1020nm.x*10))
-p = p + scale_y_continuous(sec.axis = sec_axis(~./10, name = "AOD (1020nm)")) + xlab("Date") + ylab("Vibrio (CFU/1mL)") + scale_color_manual(values=wes_palette("Darjeeling1"))
+p = p + geom_line(aes(y = log(AOD_1020nm.x)+2))
+p = p + scale_y_continuous(sec.axis = sec_axis(~.-2, name = "Log(AOD at 1020nm)")) + xlab("Date") + ylab("Vibrio Log(CFU/1mL)") + scale_color_manual(values=wes_palette("Darjeeling1"))
 p
 
 ggsave(filename="./results/irl/irl_dust_vibrio.png", plot=p, height = 8, width = 8) 
@@ -312,8 +308,8 @@ ggsave(filename="./results/irl/irl_dust_vibrio.png", plot=p, height = 8, width =
 s = sle_dust_vibrio %>% filter(AOD_1020nm.x > 0) %>% ggplot(aes(x = date))
 s = s + geom_point(aes(y = log_raw_vib, color = location_name))
 s = s + geom_line(aes(y = log_raw_vib, color = location_name)) 
-s = s + geom_line(aes(y = AOD_1020nm.x*10))
-s = s + scale_y_continuous(sec.axis = sec_axis(~./10, name = "AOD (1020nm)")) + xlab("Date") + ylab("Vibrio (CFU/1mL)") + scale_color_manual(values=wes_palette("Cavalcanti1"))
+s = s + geom_line(aes(y = log(AOD_1020nm.x)+2))
+s = s + scale_y_continuous(sec.axis = sec_axis(~.-2, name = "Log(AOD at 1020nm)")) + xlab("Date") + ylab("Vibrio Log(CFU/1mL)") + scale_color_manual(values=wes_palette("Cavalcanti1"))
 s
 
 ggsave(filename="./results/sle/sle_dust_vibrio.png", plot=s, height = 8, width = 8) 
