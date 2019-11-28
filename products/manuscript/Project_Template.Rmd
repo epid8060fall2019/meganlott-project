@@ -22,15 +22,15 @@ Harmful Algal Blooms (HABs) are an emerging concern for ecosystem and human heal
 
 ## General Background Information
 
-Harmful algal blooms (HABs) are an emerging global concern for ecosystem and public health. HAB events adversely affect water quality and deteriorate aquatic habitats. Contaminated waters pose public health risks, as HAB events may produce harmful toxins or promote the growth of pathogenic bacteria [@Kodama2006, @Kirkpatrick2016,@Grattan2016].
+Harmful algal blooms (HABs) are an emerging global concern for ecosystem and public health. HAB events adversely affect water quality and deteriorate aquatic habitats. Contaminated waters pose public health risks, as HAB events may produce harmful toxins or promote the growth of pathogenic bacteria [@Greenfield2017;@Kazamia2016].
 
-Bacteria are increasingly recognized for their role in modulating HAB bloom dynamics [@Kodama2006, @Zhou2018]. Similarly, algal blooms have been found to affect the activity of aquatic bacteria[REF]. 
+Bacteria are increasingly recognized for their role in modulating HAB bloom dynamics [@Jones2010a;@Fandino2001;@Zhou2018;@Seong2013; @Ramanan2016;@Cooper2015]. Similarly, algal blooms have been found to affect the activity of aquatic bacteria. 
 
-_Vibrio_ spp. are a group of human pathogenic bacteria that are ubiquitous in estuary and marine environments. _Vibrio_ illnesses are typically associated with the consumption of contaminated water and seafood, or with the infection of exposed wounds. _V. vulnificus_ infection is the leading cause of seafood-borne deaths in the United States, usually the infection of exposed wounds by contaminated waters. Research has demonstrated that the distribution and dynamics of _Vibrio_ populations are influenced by algal dyanamics [REF].Rapid algal growth may provide substrates and surfaces that stimulate _Vibrio_ growth. 
+_Vibrio_ spp. are a group of human pathogenic bacteria that are ubiquitous in estuary and marine environments. _Vibrio_ illnesses are typically associated with the consumption of contaminated water and seafood, or with the infection of exposed wounds. _V. vulnificus_ infection is the leading cause of seafood-borne deaths in the United States, usually the infection of exposed wounds by contaminated waters. Research has demonstrated that the distribution and dynamics of _Vibrio_ populations are influenced by algal dyanamics [@Greenfield2017; @Main2015].Rapid algal growth may provide substrates and surfaces that stimulate _Vibrio_ growth [@Main2015]. 
 
 Phytoplankton blooms may influence _Vibrio_ ecology. In turn, _Vibrio_ blooms may pose health risks to local populations.Investigating bacterial-algal interactions improves our understanding how HAB events shape microbial health risks. 
 
-Our research investigates _Vibrio_ dynamics along Florida’s Indian River Lagoon (IRL), on Florida’s east coast. The IRL is an estuary of national significance and is protected by the USA National Estuaries Program. In recent years, the IRL has suffered from dense and damaging algal blooms, including those caused by the novel brown tide algae _Aureoumbra lagunensis_ and by the toxic blue-green algae _Microcystis aeruginosa_ [@Schaefer2019]. Our research aims to investigate the interactions between bacteria and harmful algae during these HAB events. 
+Our research investigates _Vibrio_ dynamics along Florida’s Indian River Lagoon (IRL), on Florida’s east coast. The IRL is an estuary of national significance and is protected by the USA National Estuaries Program. In recent years, the IRL has suffered from dense and damaging algal blooms, including those caused by the novel brown tide algae _Aureoumbra lagunensis_ and by the toxic blue-green algae _Microcystis aeruginosa_ [@Phlips2002; @Kang2015; @Oehrle2017]. Our research aims to investigate the interactions between bacteria and harmful algae during these HAB events. 
 
 We aimed to observe these dynamics during the summer of 2019. During this period, **we did not observe an algal bloom** at our field site. **but** we did collect a wealth of data on _Vibrio_ populations and environemntal variables. I am hoping to use this project as an opportunity to examine our data with these variables. With a reproducible analysis, I am hopeful that we can collect and analyze our data when a bloom event arises.    
 
@@ -64,7 +64,7 @@ Samples were plated onto TCBS to culture and enumerate _Vibrio_ bacteria. Cell d
 
 Water samples were size fractionated in series onto polycarbonate filters (2.0 µm) and Sterivex filters (0.22 µm) to seperate the particle-attached and planktonic bacterial communities. DNA will be extracted from stored filters using the Qiagen PowerSoil Pro Kit and phenol:chloroform:isoamyl extractions. Bacterial and phytoplankton DNA will be sequenced to characterize the aquatic microbial community.
 
-Bacterial and cyanobacterial 16S rRNA will be amplified using universal 16S primers 515F/806R [REF]. Novel NGS sequencing of the _Vibrio_ heat shock  protein 60 (hsp60) will be sequenced as described in Jesser and Noble 2018 to provide additional taxonomic resolution of the _Vibrio_ community. 18S rRNA will be amplified using the universal 18S primers EukA/329R10 as described in Torre et al. 2019 to analyze the phytoplankton community. 
+Bacterial and cyanobacterial 16S rRNA will be amplified using universal 16S primers 515F/806R. Novel NGS sequencing of the _Vibrio_ heat shock  protein 60 (hsp60) will be sequenced to provide additional taxonomic resolution of the _Vibrio_ community. 18S rRNA will be amplified using the universal 18S primers EukA/329R10 as described in to analyze the phytoplankton community. 
 
 
 ## Data Aquisition
@@ -97,9 +97,9 @@ In this univariate analysis, we aim to explore _Vibrio_ concentrations and envir
 knitr::include_graphics("../../results/all/all_Vibrio2.png")
 ```
 
-### Indian River Lagoon 
+## Indian River Lagoon 
 
-In the IRL, _Vibrio_ abundance bloomed between June 17 and June 24, 2019 at the IRL 3 sampling location. During this bloom, the maximum _Vibrio_ abundance was recorded from the IRL, at 1.9 x 10^4 CFU/1mL. No bloom was obsered at the IRL 1 or IRL 2 locations during this time. In fact, the lowest _Vibrio_ abundance in the IRL was recorded at the IRL 2 location during this period, at 2.17 x 10^2 CFU/1mL on June 24, 2019. _Vibrio_ abundance increased again, at all three locations, on July 22, 2019. Enumeration of bacteria from environmental samples do not typically conform to a normal distribution, but conform instead to a Poisson distribution [REF]. Results from the Shapiro-Wilk test for normality suggest that the _Vibrio_ counts from the IRL do not follow a normal distribution (p = 1.52 x 10^-7. Typically, counts will follow a normal distribution following log transformation. However, the Vibrio counts from the IRL do not follow a normal distribution when log-trnasformed (p = 3.04 x 10^-2).  
+In the IRL, _Vibrio_ abundance bloomed between June 17 and June 24, 2019 at the IRL 3 sampling location. During this bloom, the maximum _Vibrio_ abundance was recorded from the IRL, at 1.9 x 10^4 CFU/1mL. No bloom was obsered at the IRL 1 or IRL 2 locations during this time. In fact, the lowest _Vibrio_ abundance in the IRL was recorded at the IRL 2 location during this period, at 2.17 x 10^2 CFU/1mL on June 24, 2019. _Vibrio_ abundance increased again, at all three locations, on July 22, 2019. Enumeration of bacteria from environmental samples do not typically conform to a normal distribution, but conform instead to a Poisson distribution. Results from the Shapiro-Wilk test for normality suggest that the _Vibrio_ counts from the IRL do not follow a normal distribution (p = 1.52 x 10^-7. Typically, counts will follow a normal distribution following log transformation. However, the Vibrio counts from the IRL do not follow a normal distribution when log-trnasformed (p = 3.04 x 10^-2).  
 
 In the IRL, the average AOD during this study period was 0.083. The AOD ranged between 0.025 and 0.274 over this period, peaking on June 25, 2019 (0.274) and again on July 14, 2019 (0.230). Results from the Shapiro-Wilk test for normality suggest that the AOD in the IRL does not follow a normal distribution (p = 8.09 x 10^-15). When log-transformed, the AOD can be assumed to follow a normal distribution (p =  5.52 x 10^-1).  
 
@@ -129,7 +129,7 @@ The peak in _Vibrio_ abundance appears to correspond with increases in AOD at 10
 knitr::include_graphics("../../results/irl/irl_dust_vibrio.png")
 ```
 
-### St. Lucie Estuary
+## St. Lucie Estuary
 
 In the SLE, _Vibrio_ abundance bloomed between June 19 and July 3, 2019 at SLE 1, SLE 2, and SLE 3. _Vibrio_ abundance peaked at all three locations on June 26, 2019 (3.9 x 10^3 CFU/1mL,  2.3 x 10^3 CFU/1mL,5.8 x 10^3 CFU/1mL, respectively). Results from the Shapiro-Wilk test for normality suggest that the _Vibrio_ counts from the SLE do not follow a normal distribution (p = 7.10 x 10^-7, but do follow a normal distribution when log-trnasformed (p = 4.06 x 10^-1). The enumeration of total Vibrio does not differ between sampling locations in the SLE (One-way ANOVA, p = 2.81 x 10^-1).
 
@@ -214,29 +214,62 @@ knitr::include_graphics("../../results/all/env_var_vib.png")
 
 There  does appears to be a statistically significant linear relationship between log-transformed  _Vibrio_ abundance in the IRL and SLE and normalized AOD measured the day of sampling (p = 3.8 x 10^-3).
 
-```{r fig.cap = "Enumeration of _Vibrio_ spp. from the Indian River Lagoon and St. Lucy Estuary in relation to AOD at 1020nm).", echo = FALSE, warning=FALSE}
+```{r fig.cap = "Enumeration of _Vibrio_ spp. from the Indian River Lagoon and St. Lucy Estuary in relation to AOD at 1020nm.", echo = FALSE, warning=FALSE}
 knitr::include_graphics("../../results/all/log_aod.png")
 ```
 
+Using a simple linear regression model with the 'lm' linear model function  in R. In this model, the predictor variables are measured environmental varaibles, and the predicted variable is _Vibrio_ abundance in Log(CFU/1mL). In this analysis, AOD at 1020nm is normalized through log-transformation. The results from this model suggest that both the normalized values for AOD on the day of sampling and day before sampling are significantly correlated with _Vibrio_ abundance. There is no significant relationship with other environmental varaibles measured.
+
+```{r echo = FALSE, warning=FALSE}
+resulttable = readRDS("../../results/resulttable.rds")
+knitr::kable(resulttable, caption = "Simple linear regression between _Vibrio_ abundance and environmental variables as measured from the Indian River Lagoon and St. Lucy Estuary.")
+```
 
 
-## Full analysis
+## Full Analysis
 
+In this section of the analysis, we use statistical models to analyze the relationship between our environmental varaibles and _Vibrio_ abundance. We begin with a single predictor model with the outcome of _Vibrio_ abundance and the following predictors: normalized AOD day of sampling, normalized AOD the day before sampling, salinity, pH, water temperature, sampling time, and precipitation. When filtering for missing values, our data set contains 33 observations. These observations are then divided into a training set (25 observations) and a test set (8) observations.
 
+Using the 'lm' linear model function, we can examine the RMSE of each single predictor. According to the RMSE values, the models that include the the normalized values of the AOD on the day of sampling and day before sampling may perform better than the other single-predictor models.
+
+```{r echo = FALSE, warning=FALSE}
+singlepredictor = readRDS("../../results/all/singlepredictor.rds")
+knitr::kable(singlepredictor, caption = "RMSE of the simple linear regression between _Vibrio_ abundance and environmental variables as measured from the Indian River Lagoon and St. Lucy Estuary.")
+```
+
+When examining the full model in the training data set, with all 7 predictors, the RMSE was 0.8358849. The RMSE of the model with the test data set was 0.8522869. The full model did not perform as well as any of the single-predictor models. 
+
+```{r fig.cap = "_Vibrio_ abundance predicted by the linear regression model with all predictors, in relation to _Vibrio_ abundance in the test data set.", echo = FALSE, warning=FALSE}
+knitr::include_graphics("../../results/all/test_prediction_plot.png")
+```
+
+The next step in this analysis would be to complete a varaible or subset selection. 
+
+Additionally, we explored a tree model to further explore the predictor variables and the _Vibrio_ abundance outcome. In this model, we included all 33 observations to improve the resolution of the tree model. The results from the tree model suggest once more, that the AOD is a significant predictor of _Vibrio_ abundance. 
+
+```{r fig.cap = "_Vibrio_ abundance predicted by a tree model with all predictors.", echo = FALSE, warning=FALSE}
+knitr::include_graphics("../../results/all/rparttree.png")
+```
 
 # Discussion
 
 ## Summary and Interpretation
-_Summarize what you did, what you found and what it means._
+
+In this analysis, we examine the relationship between environmental varaibles and _Vibrio_ abundance in Florida's eastern estuaries. We monitored _Vibrio_ abundance from three locations in the IRL and three locations in the SLE. We measured or collected data on water temperature, air temperature, pH, salinity, aerosol optical density, precipitation at each location or watershed. In our analysis, it appears that among these environmental variables, the aerosol optical density is significantly correlated with _Vibrio_ abundance. Results of the simple linear regression indicate the the normalized values of AOD on the day of sampling and day before sampling are significantly correlated with _Vibrio_ abundance. The linear model does not perform as well when all seven predictors are included in the model. 
 
 ## Strengths and Limitations
-_Discuss what you perceive as strengths and limitations of your analysis._
+
+In this study, we aimed to examine the relationship between _Vibrio_ abundance and HAB events. We conducted itensive weekly sampling from two watersheds that suffer from reoccuring HAB events. Unfortunately, we did not observe an algal bloom during this sampling period. The results of this data analysis suggest, however, that there are still interesting relationships between environmental variables and _Vibrio_ abundance in the IRL and SLE.
+
+This data anlysis focused on the linear relationship between _Vibrio_ abundance and several environmental varaibles. However, our study design includes time series data for our outcome and each predictor variable. Linear models may not be sufficient to explain the dynamic relationship between microbes and their physical environment. Future analyses should explore this data with time-series-specific modeling.
+
+Our study design allowed for the collection and analysis of water samples across space and time. However, in this analysis, we have discovered that the watersheds and sampling locations may be distinctly different based on environmental and biological factors. Future analyses should explore this data using mixed-effects or multilevel modeling. 
+
+This analysis considers the enviornmental varaibles that were measured in-situ or retrieved from publicly availible sources. We are still collecting data on other environmental and biological varaibles, including chlorophyll a concentration, nutrient levels, and phytoplankton abundance in these water samples. Our data collection and data analysis are still evolving.
+
 
 ## Conclusions
-_What are the main take-home messages?_
-
-
-_Include citations in your Rmd file using bibtex, the list of references will automatically be placed at the end_
+The transport and deposition of Saharan dust may influence _Vibrio_ populations in Eastern Florida. The dynamics in _Vibrio_ abundance in the IRL and SLE were explained by AOD moreso than salinity, pH, water temperature, air temperature, and precipitation. Peaks in AOD in late-June and mid-July correspond with peaks in _Vibrio_ abundance in the IRL and SLE. 
 
 # References
 

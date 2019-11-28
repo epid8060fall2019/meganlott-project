@@ -16,6 +16,7 @@ library('gridExtra')
 library('mlr')
 library('gbm')
 library('mda')
+library('Metrics')
 
 #load data. path is relative to project directory.
 environmental_vibrio = readRDS("./data/processed_data/environmental_vibrio.rds")
@@ -63,7 +64,7 @@ lm_precip = broom::tidy(lm_precip)
 lm_variables = bind_rows(lm_aod, lm_prev24, lm_ph, lm_salinity, lm_water_temp, lm_precip)
 
 # save table  
-saveRDS(lm_variables, file = "./results/resulttable.rds")
+saveRDS(lm_variables, file = "./results/all/resulttable.rds")
 
 
 ##Continuous Outcome Analysis##
@@ -109,34 +110,28 @@ saveRDS(singlepredictor, file = "./results/all/singlepredictor.rds")
 
 
 
-
-
-
-
-
-
-
 ##Multi-Predictor Models##
 set.seed(1111) #makes each code block reproducible
 #write code that uses the train function in caret to fit the outcome to all predictors using the 3 methods specified.
 
-fitControl <- trainControl(method="repeatedcv",number=5,repeats=5) #setting CV method for caret
+fitControl <- caret::trainControl(method="repeatedcv",number=5,repeats=5) #setting CV method for caret
 
 linear_model = caret::train(log_raw_vib ~ ., data = data_train, method = "lm", trControl = fitControl)
 print(linear_model)
+saveRDS(linear_model, file = "./results/all/fullpredictors.rds")
 
-regression_splines = caret::train(log_raw_vib ~ ., data = data_train, method = "earth", trControl = fitControl)
-print(regression_splines)
+test_predictions = predict(linear_model, data_test)
+rmse(data_test$log_raw_vib, test_predictions)
 
-knn_model = caret::train(log_raw_vib ~ ., data = data_train, method = "knn", trControl = fitControl)
-print(knn_model)
-
-
+test_prediction_plot = ggplot() + geom_point(aes(x = data_test$log_raw_vib, y = test_predictions)) + 
+  ylab("Test Prediction Log(CFU/mL)") + 
+  xlab("Test Data Log(CFU/mL)")
+ggsave(test_prediction_plot, file = "./results/all/test_prediction_plot.png" )
 
 ##Tree Model 
 
 #Let's only look at the varaibles (predictors) that have as much data as possible.Need to drop observations with "NA"
-d = environmental_vibrio %>% select(raw_vib, sample_time, salinity, ph, water_temp, previous_24, precipitation) %>% filter(previous_24 != "NA") 
+d = environmental_vibrio %>% select(log_raw_vib, sample_time, salinity, ph, water_temp, previous_24, precipitation) %>% filter(previous_24 != "NA") 
 
 ##Data Splitting 
 set.seed(123)
@@ -153,17 +148,17 @@ registerDoParallel(cl)
 #Set Seed
 set.seed(1111) #makes each code block reproducible
 outcomename = "TotalPath"
-Npred <- ncol(data_test)-1 # number of predictors
-resultmat <- data.frame(Variable = names(data_test)[-1], Accuracy = rep(0,Npred)) #store performance for each variable
+Npred <- ncol(d-1) # number of predictors
+resultmat <- data.frame(Variable = names(d)[-1], Accuracy = rep(0,Npred)) #store performance for each variable
 
 #Tree
 fitControl = trainControl(method="repeatedcv",number=5,repeats=5) 
-fit1 = caret::train(raw_vib ~ ., data=data_test, method="rpart",  trControl = fitControl, na.action = na.pass, tuneLength = 10) 
+fit1 = caret::train(log_raw_vib ~ ., data=d, method="rpart",  trControl = fitControl, na.action = na.pass, tuneLength = 10) 
 print(fit1$results)
 
 prp(fit1$finalModel, extra = 1, type = 1)
 
 ww=17.8/2.54; wh=ww; #for saving plot
-dev.print(device=png,width=ww,height=wh,units="in",res=600,file=here("././results/rparttree.png")) #save tree to file
+dev.print(device=png,width=ww,height=wh,units="in",res=600,file=("./results/all/rparttree.png")) #save tree to file
 
 #bootstrap aggregating 
