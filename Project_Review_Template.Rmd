@@ -1,0 +1,35 @@
+# Overview
+
+Title of project: Bloom or Bust: Influence of Harmful Algal Blooms on Vibrio Ecology in Florida’s Indian River Lagoon
+
+Author of project: Megan Lott
+
+
+# Comments
+
+Hello Megan.
+
+Well done. Because I don't know Ecology and your topic is too unfamiliar for me, so mainly  comment on the format. Here are my comments.
+
+1. Line of 261. It wrote as "The correlation plots in () and () demonstrate the correlations between Vibrio abundance and environmental variables and factors in methodology that may influence Vibrio enumeration."
+What is ()?
+
+2. Line of 147 "#Results"
+Maybe not code right for Head.
+
+3. Line of 277. "##Influence of Environmental Varibales on Vibrio Abundance in the Indian River Lagoon"
+Maybe not code right for Head.
+
+4. Line of 311. "(p 1.1 x 10^-4)"
+This way to show p-value may not be preferred.
+
+5. Your questions part is very clear.
+
+6. Figure1,2,5,6 labels are too small.
+
+7. In your discussion part, could you add some content to talk about what the meaning of your results. To me this part more like a part of results, you only show what found in statistical analysis.
+
+
+
+
+
