@@ -1,0 +1,145 @@
+# Overview
+
+Title of project: **Bloom or Bust: Influence of Harmful Algal Blooms on _Vibrio_ Ecology in Florida's Indian River Lagoon**
+
+Author of project: **Megan Lott**
+
+
+# Specific project content evaluation
+## Background, Context and Motivation
+This section introduces the context of the project. It describes the when, where, and why. It very broadly covers previous work in the field. With only reading this section of the manuscript I know that you will be finding correlations between Vibro and algal blooms. I understand what the original goal of the project was and what it will hopefully be used for in the future.
+
+### Feedback and Comments
+**Overview** The first sentence of your "Summary/Abstract" and in your "General Background Information" sections are almost exactly the same which is generally fine; however you do have "Harmful Algal Blooms" and "Harmful algal blooms" and I think that's important to be consistent on.  
+
+**Detailed** In the first paragraph I think it will create more interest in why you are doing this research if you go into the public health effects of HAB events. We know in later paragraphs what happens with Vibro and why we should directly care about Vibro. Why should we directly care about HAB? What does deteriorating aquatic habitats mean for the ecosystem, what do the harmful toxins do?  
+Having your second paragraph stand alone slows down my comprehension. It's only two sentences that are just defining why bacteria and HAB, and the two sentences are saying very similar things in that "algal bloom and bacteria interactions effects the activity and propgation of each other." If you can condense this paragraph and make it an opening sentence to the 3rd paragraph I think it will flow more coherently.  
+I like the 3rd paragraph. I think it nicely gives the reasoning for why we care about Vibro and it introduces the interest in HAB and Vibro directly.  
+The 4th paragraph - For a general audience it could be important to note what phytoplankton is, you're just changing from algal to phytoplankton.  
+5th paragraph - "these HAB events" makes it sound like those previous specific blooms, and not just algal blooms in general. Are you looking at any algal bloom or are you only interested in those two species (?).  
+6th - "*but* we did collect" is the start of a sentence currently, and environmental in that sentence is spelled wrong. 
+
+### Summary assessment
+* strong contextualization and motivation
+
+
+## Question description
+### Feedback and Comments
+The questions and hypothesis are nicely presented, covering what you will do in the future with an algal bloom, and what you are currently going to examine. In the section about the current analysis you specific mention temperatures and salinity will increase Vibrio, I'm assuming the other variable listed you hypothesize won't have present any patterns - if that is true I would plainly state it.   
+
+### Summary assessment
+* question/hypotheses fully clear
+
+
+## Data description
+### Feedback and Comments
+Description of the data source is good, and when it was collected. I would add more information about which environmental variables were collected. Also because you got data from other agencies, which agencies, how did you gather it, which variables are from another source and which were measured by you.  
+Looking into the methods/data aquisition section all of the above points are addressed. Maybe combine the data description section into the start of the methods and make subheaders in the methods section? The template is oddly organized.  
+Define why AOD matters and what it is telling you?
+
+### Summary assessment
+* source and overall structure of data explained
+
+
+## Data wrangling and exploratory analysis
+### Feedback and Comments
+Data import and cleaning - You go into more detail on the data collection in this section and I think it should be moved to the methods section. I believe this section is supposed to talk about any outside R steps you take in getting your data R ready, and then an overview of what your script is doing.  
+Your processing R script is well annotated thought which is good for exploratory.  
+Your results section is missing a space between #Results. (just formatting so you know)
+Your `descriptive_statistics.R` file goes over your exploratory analysis well.  There aren't exploratory analysis in the supplementary (there isn't a supplementary). There are a lot of figures though ones I think that can go into supplementary:  
+
++ Figure 1, could be more useful if the sites are averaged, error bars, and plotted on the same graph. Otherwise can be good for supp.  
++ Figure 3, not important as a stand alone graph. However, is the time in military time? Would just be good to note.  
++ Figure 4 (6) is already plotted in figure 2 (5) just not on the same chart. I would pick which set you think is most imporant and keep that in the paper
+
+Changes in figures:  
+
++ Figure 2 & 5 - can they be combined? Like IRL as a solid line and SLE as a dashed, shows the trends for each location and compares them to each other. Having that large of graph for each location is just a lot.  
++ Figure 4 & 6 is the same suggestion as above.  
+
+Overall, I would probably keep figures 2 & 5 and put all others in the supplementary.  
+
+### Summary assessment
+* some weaknesses in wrangling and exploratory component - just need to downsize though!
+
+
+## Appropriateness of Analysis
+### Feedback and Comments
+#### Univariate analysis 
+You presented trends in your data. You use normality testing for Vibro which seems appropriate for your data and based on literature. Do you expect AOD to follow a normal distribution?  
+ANOVA test done after test for normality is good. Did you do a test for variance before ANOVA to check that all locations have the same variance?
+#### Bivariate analysis
+Don't forget to put in figure numbers for this section. The correlation plots are very useful for telling the story of how everything is related, especially since so many of your variables are continuous.  
+Need to add a space in "##Influence of Environmental Varibales on Vibrio Abundance in the Indian River Lagoon" between the hashtags and the words to create heading.  
+The plots in this section aren't important to the final paper. I would add a majority of the linear plots to the supplemental especially because they aren't significant.  
+Add a space in "##Influence of Environmental Varibales on Vibrio Abundance in the St. Lucie Estuary"  
+I'd put the linear relationship plots in supplemental, no significant relationships. However, the Vibro abundance and normalized AOD figure for SLE is good to keep since they show a significant trend. The analysis also looks good.  
+Add space "##Influence of Environmental Varibales on Vibrio Abundance, with Combined Analysis from the Indian River Lagoon and St. Lucie Estuary"  
+Non-significant relationship chart to supplemental. Keep the AOD v Vibro abundance chart. I also don't think you need the table in the main text as it is just showing numbers that you have already cited in the text and takes up space.  
+#### Full Analysis
+Only having 33 observations makes it difficult to split into training and testing datasets. I believe you can create the model using all of your data instead, but I would check with others in the class first. "The next step in this analysis would be to complete a varaible or subset selection." Is this something you plan to do?
+
+
+### Summary assessment
+* defensible but not optimal analysis - just small questions
+
+
+## Presentation
+### Feedback and Comments
+I made most of my figure comments throughout the analysis. I don't have issues with how they look, unless you want to change the names/titles to be more reader-friendly. I feel like a lot of them will be going to supplemental though.  
+
+### Summary assessment
+* results are very well presented
+
+
+## Discussion/Conclusions
+### Feedback and Comments
+You need to add more reasoning to your summary and interpretation. What hypothesis do you have as to why AOD is related to Vibro abundance? What are some reasonings other variables aren't related. Why is Vibro at these levels anyway? What is an average AOD level in the world or this region? I believe you covered the strengths and limitations, and the conclusions give a good summary, but that information isn't directly stated elsewhere in the paper. Also if you can find other studies showing similar things. Is all Vibro you tested pathogenic?
+
+### Summary assessment
+* minor parts wrong, missing or unclear
+
+
+## Further comments
+I would go through and determine which figures are telling the story of AOD and Vibro are highly correlated and use those in this project. The other figures may become more important when you have algal bloom data as well. However, for this class I would focus on the AOD story. 
+
+
+# Overall project content evaluation
+## Structure
+### Feedback and Comments
+Remove the slides folder in products, you don't need it. Everything looks up to date and flows as expected, using the README file I can reproduce the project easily.   
+
+### Summary assessment
+* well structured
+
+
+## Documentation 
+### Feedback and Comments
+Your code is well commented and the README files are well updated.  
+
+### Summary assessment
+* fully and well documented
+
+
+
+## Reproducibility
+### Feedback and Comments
+Does it matter which order you run the analysis_code in? If it doesn't it would be good to mention that in the project README file and if it does matter put the order in the README. I had no problem reproducing your manuscript though!   
+
+### Summary assessment
+* fully reproducible without issues
+
+
+## Thoroughness
+### Feedback and Comments
+Do to this data being setup for future use when an algal bloom occurs I believe you did what you could with the data. You found an environmental variable that predicted Vibro abundance. You covered many ways of processing data and know what the limitations were of what you did. You used multiple models. I have no issues with your thoroughness  
+
+### Summary assessment
+* strong level of thorougness
+
+
+## Further comments
+I would just go back through the actual text of the project template. There are missing spaces after periods and misspellings. There is a spell check button to the left of knit, and it can run through and show you the issues. 
+
+
+
