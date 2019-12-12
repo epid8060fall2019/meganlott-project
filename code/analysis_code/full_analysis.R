@@ -18,6 +18,7 @@ library('mlr')
 library('gbm')
 library('mda')
 library('Metrics')
+library('Boruta')
 
 #load data. path is relative to project directory.
 environmental_vibrio = readRDS("./data/processed_data/environmental_vibrio.rds")

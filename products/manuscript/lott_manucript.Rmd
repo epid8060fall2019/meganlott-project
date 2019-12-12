@@ -37,7 +37,7 @@ We aimed to observe these dynamics during the summer of 2019. During this period
 
 ## Questions/Hypotheses to be addressed
 
-Broadly, we aim to examine the associations between _Vibrio_ spp. and harmful algal species during the succession of a bloom event. We ask: do harmful algal blooms promote _Vibrio_ growth during a bloom event? We hypothesize that _Vibrio_ populations will increase during brown tide blooms. The ecology of these two organisms are similar (they both thrive in warm, salty waters). In contrast, we predict that _Vibrio_ populations will decrease during the toxic blue-green algae blooms caused by Microcystis aeruginosa. Microcystis thrives in freshwater and produces a harmful toxin that may damage _Vibrio_ bacteria. 
+Broadly, we aim to examine the associations between _Vibrio_ spp. and harmful algal species during the succession of a bloom event. We ask: do harmful algal blooms promote _Vibrio_ growth during a bloom event? We hypothesize that _Vibrio_ populations will increase during brown tide blooms. The ecology of these two organisms are similar (they both thrive in warm, salty waters). In contrast, we predict that _Vibrio_ populations will decrease during the toxic blue-green algae blooms caused by _Microcystis aeruginosa_. Microcystis thrives in freshwater and produces a harmful toxin that may damage _Vibrio_ bacteria. 
 
 We're still keeping a watchful eye for an algal bloom back in Florida, but until then, we hope to ask more exploratory questions to see if there are trends or relationships between _Vibrio_ bacteria and other environmental variables. 
 
