@@ -1,3 +1,4 @@
+
 #load needed packages. make sure they are installed.
 library('tidyr')
 library('dplyr')
@@ -24,18 +25,6 @@ irl_environmental = readRDS("./data/processed_data/irl_environmental.rds")
 sle_environmental = readRDS("./data/processed_data/sle_environmental.rds")
 irl_dust = readRDS("./data/processed_data/irl_dust.rds")
 sle_dust = readRDS("./data/processed_data/sle_dust.rds")
-
-
-
-#ordinary least squares (OLS) regression
-
-model1 <- lm(log(previous_24) ~ log_raw_vib, data = environmental_vibrio)
-summary(model1)
-
-#0.02631
-
-
-#use RMSE and cross-validation 
 
 
 ###MODELING###
@@ -102,7 +91,7 @@ singlepredictor <- data.frame(Variable = names(data_train)[-1], RMSE = rep(0,Npr
 for (n in 2:ncol(data_train)) #loop over each predictor. For this to work, outcome must be in 1st column
 {
   fit1 <- caret::train(as.formula(paste("log_raw_vib ~",names(data_train)[n])), 
-                data = data_train, method = "lm", trControl = fitControl) 
+                       data = data_train, method = "lm", trControl = fitControl) 
   singlepredictor[n-1,2]= fit1$results$RMSE  
 }
 print(singlepredictor)
@@ -161,4 +150,47 @@ prp(fit1$finalModel, extra = 1, type = 1)
 ww=17.8/2.54; wh=ww; #for saving plot
 dev.print(device=png,width=ww,height=wh,units="in",res=600,file=("./results/all/rparttree.png")) #save tree to file
 
-#bootstrap aggregating 
+
+##Subset Selection 
+
+#In this analysis, we have a continuous outcome and seven continuous predictors. We will want to use filter methods for feature selection. 
+#Features will be hand-selected based on Pearson's Correlation 
+#Unfortunately, none of our variables are "strongly" correlated with the outcome (R > 0.7 or R < -0.7)
+
+#Let's only look at the varaibles (predictors) that have as much data as possible.Need to drop observations with "NA"
+d = environmental_vibrio %>% select(log_raw_vib, AOD_1020nm, previous_24, salinity, ph, water_temp, sample_time, precipitation) %>% filter(log_raw_vib != "NA") %>% filter(previous_24 != "NA") %>% filter(AOD_1020nm != "NA")
+
+boruta_output = Boruta(log_raw_vib ~ ., data=na.omit(d), doTrace=0)  
+boruta_signif = getSelectedAttributes(boruta_output, withTentative = TRUE)
+print(boruta_signif)  
+
+# Do a tentative rough fix
+roughFixMod <- TentativeRoughFix(boruta_output)
+boruta_signif <- getSelectedAttributes(roughFixMod)
+print(boruta_signif)
+
+# Variable Importance Scores
+imps <- attStats(roughFixMod)
+imps2 = imps[imps$decision != 'Rejected', c('meanImp', 'decision')]
+head(imps2[order(-imps2$meanImp), ])  # descending sort
+
+# Plot variable importance
+png(width=400,height=400, file="./results/all/variable_importance.png")
+variable_importance = plot(boruta_output, las= 2, xlab="", main="Variable Importance")
+dev.off()
+
+#We see that AOD on day before and day of sampling are important features. Does the use of these combined improve the lm? 
+
+fit2 = lm(d$log_raw_vib ~ d$AOD_1020nm + d$previous_24)
+fit3 = lm(d$log_raw_vib ~ d$AOD_1020nm + d$previous_24 + d$sample_time)
+fit4 = lm(d$log_raw_vib ~ d$AOD_1020nm + d$sample_time)
+
+
+test_predictions2 = predict(fit2, d)
+test_predictions3 = predict(fit3, d)
+test_predictions4 = predict(fit4, d)
+
+
+rmse(d$log_raw_vib, test_predictions2)
+rmse(d$log_raw_vib, test_predictions3)
+rmse(d$log_raw_vib, test_predictions4)

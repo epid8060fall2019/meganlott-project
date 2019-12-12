@@ -18,5 +18,5 @@ This is a template for a data analysis project using R (Version 3.6.1), Rmarkdow
 
 1. Clone or fork the repository. 
 2. Run the processing scipt in the `processing_code` subfolder under `code`. This code will produce the processed data.
-3. Run the analysis scripts in the `analysis_code` subfolder under `code`. The analysis script will take the processed data and produce results to be included in the manuscript. 
+3. Run the analysis scripts in the `analysis_code` subfolder under `code`. Run these scripts in the following order: `descriptive_statistics.R`, `univariate_analysis.R`, `bivariate_analysis.R`, `full_analysis.R`. 
 4. Run the the `Project_Template.Rmd` file in the 'manuscript' subfolder. This file will generate the draft manuscript with text and figures. 

@@ -95,7 +95,7 @@ irl_dust_date = irl_dust %>% filter(AOD_1020nm > 0) %>%
   xlab("Date") + 
   ylab ("Log(AOD at 1020nm)") + 
   ggtitle("Aerosol Optical Density in the Indian River Lagoon") + 
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
 
 
 sle_dust_date = sle_dust %>% filter(AOD_1020nm > 0) %>%
@@ -127,7 +127,9 @@ irl_vibrio2 = environmental_vibrio %>%
   xlab("") +
   scale_color_manual(values=wes_palette("Darjeeling1")) + 
   theme(axis.text.x = element_blank(),
-        axis.ticks.x = element_blank())
+        axis.ticks.x = element_blank()) + 
+  theme(text = element_text(size=20))
+
 
  irl_dust_date2 = irl_dust %>% filter(AOD_1020nm > 0) %>%
   ggplot(aes(x = date, y = log(AOD_1020nm))) + 
@@ -136,7 +138,9 @@ irl_vibrio2 = environmental_vibrio %>%
   xlab("") +
   scale_x_date(limits = as.Date(c('2019-06-05','2019-07-31'))) + 
   theme(axis.text.x = element_blank(),
-        axis.ticks.x = element_blank())
+        axis.ticks.x = element_blank()) + 
+  theme(text = element_text(size=20)) 
+
 
 irl_salinity_date = environmental_vibrio %>% 
   filter(region == 1) %>%
@@ -146,8 +150,11 @@ irl_salinity_date = environmental_vibrio %>%
   xlab("Date") +
   ylab ("Salinity (ppt)") + 
   scale_x_date(limits = as.Date(c('2019-06-05','2019-07-31'))) + 
-  theme(legend.position ="bottom", legend.box = "horizontal") +
-  scale_color_manual(values=wes_palette("Darjeeling1"))
+  theme(legend.position ="bottom", legend.box = "horizontal", legend.title = element_blank()) +
+  scale_color_manual(values=wes_palette("Darjeeling1")) + 
+  theme(text = element_text(size=20)) +
+  scale_y_continuous(labels = scales::number_format(accuracy = ))
+
 
 irl_precip_date = environmental_vibrio %>% 
   filter(region == 1) %>%
@@ -159,7 +166,9 @@ irl_precip_date = environmental_vibrio %>%
   xlab ("") +
   scale_color_manual(values=wes_palette("Darjeeling1")) +
   theme(axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) 
+        axis.ticks.x = element_blank()) +
+  theme(text = element_text(size=20))
+
 
 irl_ph_date = environmental_vibrio %>% 
   filter(region == 1) %>%
@@ -172,7 +181,9 @@ irl_ph_date = environmental_vibrio %>%
   theme(axis.text.x = element_blank(),
         axis.ticks.x = element_blank()) +
   theme(legend.position = "none") +
-  scale_color_manual(values=wes_palette("Darjeeling1")) 
+  scale_color_manual(values=wes_palette("Darjeeling1")) +
+  theme(text = element_text(size=20))
+
 
 irl_temp_date = environmental_vibrio %>% 
   filter(region == 1) %>%
@@ -182,11 +193,13 @@ irl_temp_date = environmental_vibrio %>%
   xlab ("Date") +
   ylab ("Water Temperature (C)") + 
   scale_x_date(limits = as.Date(c('2019-06-05','2019-07-31'))) + 
-  theme(legend.position ="bottom", legend.box = "horizontal") +
-  scale_color_manual(values=wes_palette("Darjeeling1"))
+  theme(legend.position ="bottom", legend.box = "horizontal", legend.title = element_blank()) +
+  scale_color_manual(values=wes_palette("Darjeeling1")) +
+  theme(text = element_text(size=20))
+
 
 irl_env_date = grid.arrange(irl_vibrio2, irl_ph_date, irl_dust_date2, irl_precip_date, irl_salinity_date, irl_temp_date, ncol = 2)
-ggsave(filename="./results/irl/irl_env_date.png", plot=irl_env_date, height = 12, width = 12) 
+ggsave(filename="./results/irl/irl_env_date.png", plot=irl_env_date, height = 18, width = 20) 
 
 
 #Notes: We see some strange patterns with the environmental varaibles that makes it seem like there are 
@@ -223,7 +236,10 @@ sle_vibrio2 = environmental_vibrio %>%
   xlab("") +
   scale_color_manual(values=wes_palette("Cavalcanti1")) + 
   theme(axis.text.x = element_blank(),
-        axis.ticks.x = element_blank())
+        axis.ticks.x = element_blank())+ 
+  theme(text = element_text(size=20)) + 
+  scale_y_continuous(labels = scales::number_format(accuracy = 0.1))
+
 
 
 sle_dust_date2 = sle_dust %>% filter(AOD_1020nm > 0) %>%
@@ -233,7 +249,10 @@ sle_dust_date2 = sle_dust %>% filter(AOD_1020nm > 0) %>%
   xlab("") +
   scale_x_date(limits = as.Date(c('2019-06-05','2019-07-31'))) + 
   theme(axis.text.x = element_blank(),
-        axis.ticks.x = element_blank())
+        axis.ticks.x = element_blank()) + 
+  theme(text = element_text(size=20)) +
+  scale_y_continuous(limits = c(-4, -1), labels = scales::number_format(accuracy = 1)) 
+
 
 
 sle_salinity_date = environmental_vibrio %>% 
@@ -244,8 +263,12 @@ sle_salinity_date = environmental_vibrio %>%
   ylab ("Salinity (ppt)") + 
   xlab("Date") +
   scale_x_date(limits = as.Date(c('2019-06-05','2019-07-31'))) + 
-  theme(legend.position ="bottom", legend.box = "horizontal") +
-  scale_color_manual(values=wes_palette("Cavalcanti1"))
+  theme(legend.position ="bottom", legend.box = "horizontal", legend.title = element_blank()) +
+  scale_color_manual(values=wes_palette("Cavalcanti1")) + 
+  theme(text = element_text(size=20)) +
+  scale_y_continuous(labels = scales::number_format(accuracy = ))
+
+
 
 sle_precip_date = environmental_vibrio %>% 
   filter(region == 2) %>%
@@ -257,7 +280,11 @@ sle_precip_date = environmental_vibrio %>%
   xlab ("") +
   scale_color_manual(values=wes_palette("Cavalcanti1")) +
   theme(axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) 
+        axis.ticks.x = element_blank()) +
+  theme(text = element_text(size=20)) + 
+  scale_y_continuous(labels = scales::number_format(accuracy = 0.1))
+
+
 
 sle_ph_date = environmental_vibrio %>% 
   filter(region == 2) %>%
@@ -270,7 +297,9 @@ sle_ph_date = environmental_vibrio %>%
         axis.ticks.x = element_blank()) +
   theme(legend.position = "none") +
   xlab ("") +
-  scale_color_manual(values=wes_palette("Cavalcanti1")) 
+  scale_color_manual(values=wes_palette("Cavalcanti1")) +
+  theme(text = element_text(size=20))
+
 
 
 sle_temp_date = environmental_vibrio %>% 
@@ -281,11 +310,13 @@ sle_temp_date = environmental_vibrio %>%
   xlab ("Date") +
   ylab ("Water Temperature (C)") + 
   scale_x_date(limits = as.Date(c('2019-06-05','2019-07-31'))) + 
-  theme(legend.position ="bottom", legend.box = "horizontal") +
-  scale_color_manual(values=wes_palette("Cavalcanti1"))
+  theme(legend.position ="bottom", legend.box = "horizontal", legend.title = element_blank()) +
+  scale_color_manual(values=wes_palette("Cavalcanti1")) +
+  theme(text = element_text(size=20))
+
 
 sle_env_date = grid.arrange(sle_vibrio2, sle_ph_date, sle_dust_date2, sle_precip_date, sle_salinity_date, sle_temp_date, ncol = 2)
-ggsave(filename="./results/sle/sle_env_date.png", plot=sle_env_date, height = 12, width = 12) 
+ggsave(filename="./results/sle/sle_env_date.png", plot=sle_env_date, height = 18, width = 20) 
 
 
 #Let's combine vibrio over time with dust over time. 
